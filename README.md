@@ -34,4 +34,3 @@ Trotz dieser Angebote sind viele digitale Lernmedien oft nicht auf die spezielle
 - 29.10.2024 - Alleinstellungsmerkmale (Unterschied)
 - 29.10.2024 - erste Risiken
 - 29.10.2024 - Spezifikation des ersten technischen/architekturellen Proof-of-Concepts (PoC)
-- 29.10.2024 - Feedback einholen
