@@ -24,8 +24,9 @@ Obwohl das Potenzial digitaler Medien zur Förderung von Kindern mit Down-Syndro
 ## Zeitplan:
 - 27.10.2024 - Domänenmodell
 - 28.10.2024 - Zielhierarchie
+- 28.10.2024 - Stakeholderanalyse
+- 28.10.2024 - User Profiles und Personas
 - 28.10.2024 - Projektplan
-- 29.10.2024 - Alleinstellungsmerkmale (Unterschied)
 - 29.10.2024 - erste Risiken
 - 29.10.2024 - Spezifikation des ersten technischen/architekturellen Proof-of-Concepts (PoC)
 
