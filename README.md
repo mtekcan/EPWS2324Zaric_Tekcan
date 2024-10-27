@@ -18,6 +18,6 @@ Wie können digitale Medien in der Frühförderung und im schulischen Kontext ge
 - Welche barrierefreien Gestaltungselemente machen digitale Medien für Kinder mit Down-Syndrom zugänglich?
 
 ### Hypothesen:
-H1: Der gezielte Einsatz digitaler Medien im Frühförder- und schulischen Kontext kann signifikant zur Verbesserung der sprachlichen, kognitiven und motorischen Entwicklung von Kindern mit Down-syndrom beitragen.
-H2: Interaktive und personalisierbare digitale Lerninhalte steigern die Motivation und das Engagement von Kindern mit Downsyndrom im Lernprozess.
-H3: Barrierefrei gestaltete digitale Medien, die an die motorischen und kognitiven Fähigkeiten der Kinder angepasst sind, erhöhen die Zugänglichkeit und den Nutzen solcher Medien.
+- H1: Der gezielte Einsatz digitaler Medien im Frühförder- und schulischen Kontext kann signifikant zur Verbesserung der sprachlichen, kognitiven und motorischen Entwicklung von Kindern mit Down-syndrom beitragen.
+- H2: Interaktive und personalisierbare digitale Lerninhalte steigern die Motivation und das Engagement von Kindern mit Downsyndrom im Lernprozess.
+- H3: Barrierefrei gestaltete digitale Medien, die an die motorischen und kognitiven Fähigkeiten der Kinder angepasst sind, erhöhen die Zugänglichkeit und den Nutzen solcher Medien.
