@@ -28,3 +28,9 @@ Obwohl das Potenzial digitaler Medien zur Förderung von Kindern mit Down-Syndro
 - 29.10.2024 - Alleinstellungsmerkmale (Unterschied)
 - 29.10.2024 - erste Risiken
 - 29.10.2024 - Spezifikation des ersten technischen/architekturellen Proof-of-Concepts (PoC)
+
+## Domänenmodell:
+<img width="572" alt="Bildschirmfoto 2024-10-27 um 19 54 39" src="https://github.com/user-attachments/assets/28a49857-44bc-4ecc-b4f0-9b58c45057d0">
+
+
+  
