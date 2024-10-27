@@ -13,9 +13,9 @@ Die geplante Arbeit verfolgt das Ziel, die spezifischen Bedürfnisse von Kindern
 Wie können digitale Medien in der Frühförderung und im schulischen Kontext genutzt werden, um die sprachliche, kognitive und motorische Entwicklung von Kindern mit Downsyndrom individuell zu fördern und ihre Teilhabechancen zu verbessern?
 
 ### Unterfragen:
-Welche besonderen sprachlichen, kognitiven und motorischen Bedürfnisse haben Kinder mit Down-Syndrom in Frühförderung und Schulalltag?
-Welche digitalen Medien und Lernformate eignen sich für Kinder mit Entwicklungsbesonderheiten und wie lassen sie sich für Kinder mit Down-Syndrom anpassen?
-Welche barrierefreien Gestaltungselemente machen digitale Medien für Kinder mit Down-Syndrom zugänglich?
+- Welche besonderen sprachlichen, kognitiven und motorischen Bedürfnisse haben Kinder mit Down-Syndrom in Frühförderung und Schulalltag?
+- Welche digitalen Medien und Lernformate eignen sich für Kinder mit Entwicklungsbesonderheiten und wie lassen sie sich für Kinder mit Down-Syndrom anpassen?
+- Welche barrierefreien Gestaltungselemente machen digitale Medien für Kinder mit Down-Syndrom zugänglich?
 
 ### Hypothesen:
 H1: Der gezielte Einsatz digitaler Medien im Frühförder- und schulischen Kontext kann signifikant zur Verbesserung der sprachlichen, kognitiven und motorischen Entwicklung von Kindern mit Down-syndrom beitragen.
