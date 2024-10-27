@@ -28,10 +28,10 @@ Das Potenzial digitaler Medien zur Förderung von Kindern mit Down-Syndrom bleib
 Trotz dieser Angebote sind viele digitale Lernmedien oft nicht auf die speziellen Bedürfnisse dieser Kinder angepasst. Mangelnde Benutzerfreundlichkeit und fehlende interdisziplinäre Zusammenarbeit zwischen Entwicklern und Therapeuten erschweren die Integration dieser Technologien in den Förderalltag (Johnson & Blanchard, 2017; Dederich, 2016).
 
 ## Zeitplan:
-27.10.2024 - Domänenmodell
-28.10.2024 - Zielhierarchie
-28.10.2024 - Projektplan
-29.10.2024 - Alleinstellungsmerkmale (Unterschied)
-29.10.2024 - erste Risiken
-29.10.2024 - Spezifikation des ersten technischen/architekturellen Proof-of-Concepts (PoC)
-29.10.2024 - Feedback einholen
+- 27.10.2024 - Domänenmodell
+- 28.10.2024 - Zielhierarchie
+- 28.10.2024 - Projektplan
+- 29.10.2024 - Alleinstellungsmerkmale (Unterschied)
+- 29.10.2024 - erste Risiken
+- 29.10.2024 - Spezifikation des ersten technischen/architekturellen Proof-of-Concepts (PoC)
+- 29.10.2024 - Feedback einholen
