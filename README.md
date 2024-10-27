@@ -19,9 +19,7 @@ Wie können digitale Medien in der Frühförderung und im schulischen Kontext ge
 - H3: Barrierefrei gestaltete digitale Medien, die an die motorischen und kognitiven Fähigkeiten der Kinder angepasst sind, erhöhen die Zugänglichkeit und den Nutzen solcher Medien.
 
 ## Forschungsstand:
-Das Potenzial digitaler Medien zur Förderung von Kindern mit Down-Syndrom bleibt weitgehend ungenutzt. Es gibt jedoch bereits einige geeignete Angebote, wie die Apps Proloquo2Go und Sounding Board zur Sprachförderung sowie Lern-Apps wie Endless Alphabet und Todo Math. Plattformen wie Starfall und ABCmouse bieten interaktive Lernspiele, während motorische Fähigkeiten durch Spiele wie GoNoodle gefördert werden. Neuere Technologien wie Virtual Reality (z. B. Oculus Quest) und Augmented Reality (z. B. Zappar) könnten die sozialen Fähigkeiten der Kinder unterstützen.
-
-Trotz dieser Angebote sind viele digitale Lernmedien oft nicht auf die speziellen Bedürfnisse dieser Kinder angepasst. Mangelnde Benutzerfreundlichkeit und fehlende interdisziplinäre Zusammenarbeit zwischen Entwicklern und Therapeuten erschweren die Integration dieser Technologien in den Förderalltag (Johnson & Blanchard, 2017; Dederich, 2016).
+Obwohl das Potenzial digitaler Medien zur Förderung von Kindern mit Down-Syndrom noch wenig ausgeschöpft ist, gibt es einige relevante Angebote. Sprachförder-Apps wie Proloquo2Go und Sounding Board sowie Lern-Apps wie Endless Alphabet und Todo Math bieten erste hilfreiche Ansätze. Plattformen wie Starfall und ABCmouse unterstützen spielerisch die kognitive Förderung, während motorische Fähigkeiten durch Programme wie GoNoodle verbessert werden können. Neue Technologien wie Virtual Reality (z. B. Oculus Quest) und Augmented Reality (z. B. Zappar) bieten weiteres Potenzial zur Förderung sozialer Fähigkeiten. Trotz dieser Entwicklungen fehlt es vielen digitalen Medien noch an Anpassungen an die spezifischen Bedürfnisse dieser Kinder. Dies erschwert die Integration solcher Technologien in den Förderalltag (Johnson & Blanchard, 2017; Dederich, 2016).
 
 ## Zeitplan:
 - 27.10.2024 - Domänenmodell
