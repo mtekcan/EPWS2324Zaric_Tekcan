@@ -34,4 +34,22 @@ Obwohl das Potenzial digitaler Medien zur Förderung von Kindern mit Down-Syndro
 <img width="572" alt="Bildschirmfoto 2024-10-27 um 19 54 39" src="https://github.com/user-attachments/assets/28a49857-44bc-4ecc-b4f0-9b58c45057d0">
 
 
+## Verwendete Quellen:
+- Maier-Michalitsch, G., & Zuleger, H. (2021). Förderung von Kindern mit Downsyndrom: Frühförderung und inklusive Bildungsansätze. Kohlhammer.Bosse, I., Schluchter, J., &
+- Bosse, I., Schluchter, J., & Zorn, I. (2019). Inklusive Medienbildung und digitale Teilhabe. VS Verlag.
+- Dederich, M. (2016). Inklusion, Medien und digitale Teilhabe: Herausforderungen und Chancen der digitalen Inklusion. Springer.
+- Cuskelly, M., Jobling, A., & Buckley, S. (2008). Down Syndrome Across the Life Span. Wiley.
+- NeuronUP (2023). 5 Übungen für kognitives Training bei Downsyndrom. Verfügbar unter: https://neuronup.com/de/aktivitaten-fur-neurorehabilitation/aktivitaten-fur-down-syndrom/5-uebungen-fuer-kognitives-training-fuer-menschen-mit-down-syndrom/
+- Johnson, A., & Blanchard, J. (2017). Impact of Digital Games on Early Childhood Development for Children with Cognitive Disabilities. Early Childhood Research Journal.
+- Proloquo2Go
+- Sounding Board
+- Endless Alphabet 
+- Todo Math
+- Starfall
+- ABCmouse
+- GoNoodle
+- Johnson, G., & Blanchard, J. (2017). Barrierefreiheit in digitalen Bildungsmedien für Kinder mit Behinderungen. Journal of Educational Technology.
+- Dederich, M. (2016). Behinderung und digitale Medien: Chancen und Herausforderungen. In Handbuch Inklusion und Medien.
+- Cuskelly, M., Jobling, A., & Buckley, S. (2008). Down Syndrome Across the Life Span: Perspectives on Developmental, Cognitive, and Behavioral Health.
+- Maier-Michalitsch, K., & Zuleger, S. (2021). Förderung der neurokognitiven Entwicklung bei Kindern mit Down-Syndrom.
   
