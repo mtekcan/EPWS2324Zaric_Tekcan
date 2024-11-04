@@ -1,25 +1,31 @@
 # Exposé
 ## Problemstellung:
-Kinder mit Down-Syndrom stehen vor besonderen Herausforderungen, die ihre sprachliche, kognitive und motorische Entwicklung betreffen. Frühfördermaßnahmen sind daher essenziell, um Entwicklungsverzögerungen zu mindern und die Persönlichkeitsentwicklung der Kinder zu stärken (Maier-Michalitsch & Zuleger, 2021). Während Frühförderprogramme wie Sprachtherapie und Ergotherapie ihre Relevanz gezeigt haben, wird das Potenzial digitaler Medien zur Förderung dieser Kinder noch nicht umfassend genutzt (Bosse, Schluchter & Zorn, 2019). Digitale Medien können jedoch wertvolle Unterstützung leisten, indem sie durch interaktive Lernspiele, barrierefreie Kommunikationsplattformen und personalisierte Inhalte auf die speziellen Bedürfnisse der Kinder eingehen (Dederich, 2016). Studien weisen darauf hin, dass digitale Lernmedien das kognitive Potenzial von Kindern mit Entwicklungsverzögerungen positiv beeinflussen können, besonders durch gezielte Ansprache der Neuroplastizität (Cuskelly, Jobling & Buckley, 2008). Jedoch fehlt es vielen digitalen Angeboten an Barrierefreiheit und Anpassungen an die Bedürfnisse von Kindern mit Down-Syndrom. Dies schränkt ihren Zugang zu Lerninhalten ein und mindert ihre Teilhabechancen (Johnson & Blanchard, 2017).
+Digitale Medien bieten vielfältige Möglichkeiten, um Kinder mit besonderen Bedürfnissen zu fördern, beispielsweise durch interaktive Lernspiele und barrierefreie Kommunikationsplattformen (Dederich, 2016).
+
+Digitale Medien bieten viele Möglichkeiten, um Kinder mit besonderen Bedürfnissen gezielt zu fördern. So können interaktive Lernspiele und barrierefreie Kommunikationsplattformen Kinder mit Lern- und Entwicklungsbeeinträchtigungen unterstützen, indem sie Inhalte ansprechender und zugänglicher gestalten (Dederich, 2016). Trotz dieses Potenzials bleibt der Zugang zu digitalen Bildungsangeboten für Kinder mit speziellen Bedürfnissen, insbesondere für Kinder mit Down-Syndrom und kognitiven Beeinträchtigungen, oft eingeschränkt. Viele digitale Lernplattformen und Apps sind nicht ausreichend an ihre besonderen Anforderungen angepasst, was zu erheblichen Barrieren führt und ihre Teilhabechancen verringert (Johnson & Blanchard, 2017).(Johnson & Blanchard, 2017).
+
+Vor allem im Bereich des interaktiven Lernens und der digitalen Kommunikation gibt es erhebliche Defizite. Lerninhalte sind häufig nicht intuitiv bedienbar oder visuell und sprachlich zu komplex, was den Zugang und die Verständlichkeit für betroffene Kinder erschwert (Bölte et al., 2019). Die gängigen Standards und Designkonzepte berücksichtigen die Prinzipien des Universal Design oft nicht ausreichend, sodass die digitalen Angebote den spezifischen Bedürfnissen der Zielgruppe nicht gerecht werden (Mace & Story, 1998). Dies stellt eine große Herausforderung für die Inklusion im Bildungsbereich dar, da Kinder mit Einschränkungen durch fehlende Anpassungen in ihren Lernfortschritten eingeschränkt werden und nicht das gleiche Bildungsangebot wie andere Kinder ihres Alters erhalten. (UNESCO, 2020).
 
 ## Zielsetzung:
-Diese Arbeit hat das Ziel, die spezifischen sprachlichen, kognitiven und motorischen Bedürfnisse von Kindern mit Down-Syndrom im Rahmen der Frühförderung und im schulischen Kontext zu identifizieren und gezielt zu unterstützen. Es soll untersucht werden, wie digitale Medien zur individuellen Förderung der Kinder beitragen und ihre Stärken stärken können. Das übergeordnete Ziel ist es, praxisnahe Erkenntnisse zu gewinnen, die Fördermaßnahmen und digitale Lernmedien für Kinder mit Down-Syndrom wirksam gestalten und ihre Entwicklung optimal fördern.
+Die geplante Arbeit verfolgt das Ziel, die spezifischen Bedürfnisse von Kindern mit besonderen Bedürfnissen, insbesondere von Kindern mit Down-Syndrom, im Kontext digitaler Medien zu untersuchen. Dabei wird analysiert, wie interaktive Lernspiele und barrierefreie Kommunikationsplattformen eingesetzt werden können, um diese Kinder gezielt zu fördern und ihre individuellen Stärken zu unterstützen. Ziel ist es, praxisorientierte Erkenntnisse zu gewinnen, die helfen, digitale Lernmedien effektiv und ansprechend zu gestalten, um die sprachliche und kognitive Entwicklung der Kinder optimal zu fördern und ihre Teilhabechancen im Bildungsbereich zu erhöhen.
 
 ## Fragestellung:
-Wie können digitale Medien in der Frühförderung und im schulischen Kontext genutzt werden, um die sprachliche, kognitive und motorische Entwicklung von Kindern mit Downsyndrom individuell zu fördern und ihre Teilhabechancen zu verbessern?
+Wie können digitale Medien durch barrierefreie Gestaltung genutzt werden, um die sprachliche, kognitive und motorische Entwicklung von Kindern mit Down-Syndrom individuell zu fördern und ihre Teilhabechancen zu verbessern?
 
 ### Unterfragen:
-- Welche besonderen sprachlichen, kognitiven und motorischen Bedürfnisse haben Kinder mit Down-Syndrom in Frühförderung und Schulalltag?
-- Welche digitalen Medien und Lernformate eignen sich für Kinder mit Entwicklungsbesonderheiten und wie lassen sie sich für Kinder mit Down-Syndrom anpassen?
+- Inwieweit fördern barrierefreie digitale Medien die sprachliche und kognitive Entwicklung von Kindern mit Down-Syndrom im Vergleich zu nicht barrierefreien Alternativen?
+- Wie wirken sich verschiedene Arten von digitalen Medien (wie Apps, Spiele oder Videos) auf die Entwicklung von Kindern mit Down-Syndrom aus?
 - Welche barrierefreien Gestaltungselemente machen digitale Medien für Kinder mit Down-Syndrom zugänglich?
-
+- 
 ### Hypothesen:
-- H1: Der gezielte Einsatz digitaler Medien im Frühförder- und schulischen Kontext kann signifikant zur Verbesserung der sprachlichen, kognitiven und motorischen Entwicklung von Kindern mit Down-syndrom beitragen.
-- H2: Interaktive und personalisierbare digitale Lerninhalte steigern die Motivation und das Engagement von Kindern mit Downsyndrom im Lernprozess.
+- H1: Kinder mit Down-Syndrom, die regelmäßig barrierefreie digitale Medien nutzen, zeigen größere Fortschritte in ihrer motorischen und geistigen Entwicklung im Vergleich zu denen, die diese Medien nicht nutzen.
+- H2: Kinder mit Down-Syndrom zeigen eine höhere Motivation und Teilhabe an Lernaktivitäten, wenn digitale Medien barrierefreie, spielerische und ansprechende Elemente enthalten.
 - H3: Barrierefrei gestaltete digitale Medien, die an die motorischen und kognitiven Fähigkeiten der Kinder angepasst sind, erhöhen die Zugänglichkeit und den Nutzen solcher Medien.
-
+- 
 ## Forschungsstand:
-Obwohl das Potenzial digitaler Medien zur Förderung von Kindern mit Down-Syndrom noch wenig ausgeschöpft ist, gibt es einige relevante Angebote. Sprachförder-Apps wie Proloquo2Go und Sounding Board sowie Lern-Apps wie Endless Alphabet und Todo Math bieten erste hilfreiche Ansätze. Plattformen wie Starfall und ABCmouse unterstützen spielerisch die kognitive Förderung, während motorische Fähigkeiten durch Programme wie GoNoodle verbessert werden können. Neue Technologien wie Virtual Reality (z. B. Oculus Quest) und Augmented Reality (z. B. Zappar) bieten weiteres Potenzial zur Förderung sozialer Fähigkeiten. Trotz dieser Entwicklungen fehlt es vielen digitalen Medien noch an Anpassungen an die spezifischen Bedürfnisse dieser Kinder. Dies erschwert die Integration solcher Technologien in den Förderalltag (Johnson & Blanchard, 2017; Dederich, 2016).
+Das Potenzial digitaler Medien zur Förderung von Kindern mit Down-Syndrom bleibt weitgehend ungenutzt. Es gibt jedoch bereits einige geeignete Angebote, wie die Apps Proloquo2Go und Sounding Board zur Sprachförderung sowie Lern-Apps wie Endless Alphabet und Todo Math. Plattformen wie Starfall und ABCmouse bieten interaktive Lernspiele, während motorische Fähigkeiten durch Spiele wie GoNoodle gefördert werden. Neuere Technologien wie Virtual Reality (z. B. Oculus Quest) und Augmented Reality (z. B. Zappar) könnten die sozialen Fähigkeiten der Kinder unterstützen.
+
+Trotz dieser Angebote sind viele digitale Lernmedien oft nicht auf die speziellen Bedürfnisse dieser Kinder angepasst. Mangelnde Benutzerfreundlichkeit und fehlende interdisziplinäre Zusammenarbeit zwischen Entwicklern und Therapeuten erschweren die Integration dieser Technologien in den Förderalltag (Johnson & Blanchard, 2017; Dederich, 2016).
 
 ## Zeitplan:
 - 27.10.2024 - Domänenmodell
