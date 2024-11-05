@@ -40,15 +40,12 @@ Trotz dieser Angebote sind viele digitale Lernmedien oft nicht auf die spezielle
 
 
 ## Verwendete Quellen:
-- Maier-Michalitsch, G., & Zuleger, H. (2021). Förderung von Kindern mit Downsyndrom: Frühförderung und inklusive Bildungsansätze. Kohlhammer.Bosse, I., Schluchter, J., &
-- Bosse, I., Schluchter, J., & Zorn, I. (2019). Inklusive Medienbildung und digitale Teilhabe. VS Verlag.
-- Dederich, M. (2016). Inklusion, Medien und digitale Teilhabe: Herausforderungen und Chancen der digitalen Inklusion. Springer.
-- Cuskelly, M., Jobling, A., & Buckley, S. (2008). Down Syndrome Across the Life Span. Wiley.
-- NeuronUP (2023). 5 Übungen für kognitives Training bei Downsyndrom. Verfügbar unter: https://neuronup.com/de/aktivitaten-fur-neurorehabilitation/aktivitaten-fur-down-syndrom/5-uebungen-fuer-kognitives-training-fuer-menschen-mit-down-syndrom/
-- Johnson, A., & Blanchard, J. (2017). Impact of Digital Games on Early Childhood Development for Children with Cognitive Disabilities. Early Childhood Research Journal.
-- Proloquo2Go, Sounding Board, Endless Alphabet, Todo Math, Starfall, ABCmouse, GoNoodle
-- Johnson, G., & Blanchard, J. (2017). Barrierefreiheit in digitalen Bildungsmedien für Kinder mit Behinderungen. Journal of Educational Technology.
 - Dederich, M. (2016). Behinderung und digitale Medien: Chancen und Herausforderungen. In Handbuch Inklusion und Medien.
-- Cuskelly, M., Jobling, A., & Buckley, S. (2008). Down Syndrome Across the Life Span: Perspectives on Developmental, Cognitive, and Behavioral Health.
-- Maier-Michalitsch, K., & Zuleger, S. (2021). Förderung der neurokognitiven Entwicklung bei Kindern mit Down-Syndrom.
-  
+- Johnson, G., & Blanchard, J. (2017). Barrierefreiheit in digitalen Bildungsmedien für Kinder mit Behinderungen. Journal of Educational Technology.
+- Bölte, J., Möller, K., & Riedel, T. (2019). Barrieren und Chancen digitaler Medien in der Bildung für Kinder mit besonderen Bedürfnissen.
+- Mace, R. L., Story, M. F. & Mueller, J. L. (1998): "The Universal Design File: Designing for People of All Ages and Abilities"
+- UNESCO (2020): Weltbildungsbericht: Inklusion und Bildung: Für alle heißt für alle
+- Proloquo2Go, Sounding Board, Endless Alphabet, Todo Math, Starfall, ABCmouse, GoNoodle
+
+
+
