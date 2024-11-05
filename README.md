@@ -29,11 +29,23 @@ Trotz dieser Angebote sind viele digitale Lernmedien oft nicht auf die spezielle
 ## Zeitplan:
 - 27.10.2024 - Domänenmodell
 - 28.10.2024 - Zielhierarchie
-- 28.10.2024 - Stakeholderanalyse
-- 28.10.2024 - User Profiles und Personas
-- 29.10.2024 - Projektplan
-- 29.10.2024 - erste Risiken
-- 29.10.2024 - Spezifikation des ersten technischen/architekturellen Proof-of-Concepts (PoC)
+- 04.11.2024 - Stakeholderanalyse
+- 04.11.2024 - User Profiles
+- 05.11.2024 - Erfordernisse
+- 05.11.2024 - Anforderungen
+- 05.11.2024 - Projektplan
+- 05.11.2024 - erste Risiken
+- 06.11.2024 - Proof-of-Concepts(PoC)
+- 12.11.2024 - Risikoanalyse(Aufstellung und Bewerbung der identifizierten Risiken; z. B. architektonische, technische, kommunikationsbezogene Risiken)
+- 14.11.2024 - Wireframes
+- 18.11.2024 - Softwaremodellierung
+- 25.11.2024 - Kognitive walkthrough
+- 09.12.2024 - Prototyp design
+- 20.01.2024 - Funktionaler Prototyp
+- 03.02.2024 - Prototyptest
+- 10.02.2024 - Poster
+
+
 
 ## Domänenmodell:
 <img width="572" alt="Bildschirmfoto 2024-10-27 um 19 54 39" src="https://github.com/user-attachments/assets/28a49857-44bc-4ecc-b4f0-9b58c45057d0">
