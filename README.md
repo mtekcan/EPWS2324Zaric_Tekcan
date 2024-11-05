@@ -30,7 +30,7 @@ Trotz dieser Angebote sind viele digitale Lernmedien oft nicht auf die spezielle
 - 27.10.2024 - Domänenmodell
 - 28.10.2024 - Zielhierarchie
 - 04.11.2024 - Stakeholderanalyse
-- 04.11.2024 - User Profiles
+- 04.11.2024 - Persona + Szenarien
 - 05.11.2024 - Erfordernisse
 - 05.11.2024 - Anforderungen
 - 05.11.2024 - Projektplan
