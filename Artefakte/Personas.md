@@ -1,4 +1,4 @@
-# Person1:
+# Persona1 :
 Name: Kilian Maier
 Alter: 10
 Geschlecht: Männlich
