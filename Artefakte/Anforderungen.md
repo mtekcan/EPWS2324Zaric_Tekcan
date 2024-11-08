@@ -1,3 +1,4 @@
+#Anforderungen
 A1: Das System muss fähig sein, kognitive und verständliche Lerninhalte bereitzustellen, um Kindern mit Down-Syndrom eine angemessene Anpassung an Lerninhalte zu ermöglichen (1).
 A2: Das System sollte die Stimmung und Motivation der Kinder durch visuell ansprechende Lerninhalte fördern (2).
 A3: Das System muss die Möglichkeit bieten, spielerische Elemente einzubauen, um die Motivation der Kinder zu steigern (3).
