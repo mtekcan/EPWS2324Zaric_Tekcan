@@ -1,5 +1,5 @@
 ## Problemstellung:
-Quellen zu der Recherche sollten aktuell sein. 2017 wäre nicht aktuell
+- Quellen zu der Recherche sollten aktuell sein. 2017 wäre nicht aktuell
 
 ## Zielsetzung:
 - Barrierefreies System mehr zum Vordergrund bringen
