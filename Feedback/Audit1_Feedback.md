@@ -39,7 +39,7 @@
 ## Proof Of Concept:
 - Zu einem PoC gehören auch Risiken, diese auch mit analysieren : Welche Risiken beachten wir?
 - Risiken könnten sein: fehlende Datenbanken, Algorithmen
-- 
+  
 ##  Zeitplan:
 - mit den fehlenden Audits vervollständigen
 - Nicht immer „alle“ schreiben sondern wirklich die Aufgaben aufteilen an jeden
