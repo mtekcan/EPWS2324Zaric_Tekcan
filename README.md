@@ -48,7 +48,7 @@ Trotz dieser Angebote sind viele digitale Lernmedien oft nicht auf die spezielle
 
 
 ## Domänenmodell:
-<img width="572" alt="Bildschirmfoto 2024-10-27 um 19 54 39" src="https://github.com/user-attachments/assets/28a49857-44bc-4ecc-b4f0-9b58c45057d0">
+<img 
 
 
 ## Verwendete Quellen:
