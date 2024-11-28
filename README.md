@@ -46,7 +46,7 @@ Trotz dieser Angebote sind viele digitale Lernmedien oft nicht auf die spezielle
 - 10.02.2024 - Poster
 
 
-## Domänenmodell:
+## Domänenmodell IST-Zustand:
 <img width="1182" alt="Bildschirmfoto 2024-11-28 um 19 33 09" src="https://github.com/user-attachments/assets/edfb5ca8-5506-45bd-ab6d-ba81d982dfba">
 
 
