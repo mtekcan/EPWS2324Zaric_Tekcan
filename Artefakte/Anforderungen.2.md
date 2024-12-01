@@ -1,12 +1,12 @@
 ## Anforderungen Neu
-A1: Das System muss fähig sein, kognitive und verständliche Lerninhalte bereitzustellen, um Kindern mit Down-Syndrom eine angemessene Anpassung an Lerninhalte zu ermöglichen (1).
-A2: Das System muss Lerninhalte in unterschiedlichen Schwierigkeitsstufen anbieten, um individuell angepasste Lernmöglichkeiten zu gewährleisten(1).
-A3: Das System muss interaktive Funktionen wie Hinweise oder Beispiele bereitstellen, um die kognitive Anpassung zu erleichtern(1).
-A4: Das System sollte die Stimmung und Motivation der Kinder durch visuell ansprechende Lerninhalte fördern (2).
-A5: Das System sollte interaktive visuelle Elemente, wie Animationen oder Grafiken, enthalten, um die Aufmerksamkeit der Kinder zu fördern(2).
-A6: Das System muss eine Farbpalette bieten, die speziell auf die Bedürfnisse von Kindern mit Sehbeeinträchtigungen abgestimmt ist(2),(4).
-A7: Das System muss die Möglichkeit bieten, spielerische Elemente einzubauen, um die Motivation der Kinder zu steigern (3).
-A8: Das System muss eine Funktion zum Speichern und Wiederholen von abgeschlossenen spielerischen Lernmodulen enthalten(3).
+- A1: Das System muss fähig sein, kognitive und verständliche Lerninhalte bereitzustellen, um Kindern mit Down-Syndrom eine angemessene Anpassung an Lerninhalte zu ermöglichen (1).
+- A2: Das System muss Lerninhalte in unterschiedlichen Schwierigkeitsstufen anbieten, um individuell angepasste Lernmöglichkeiten zu gewährleisten(1).
+- A3: Das System muss interaktive Funktionen wie Hinweise oder Beispiele bereitstellen, um die kognitive Anpassung zu erleichtern(1).
+- A4: Das System sollte die Stimmung und Motivation der Kinder durch visuell ansprechende Lerninhalte fördern (2).
+- A5: Das System sollte interaktive visuelle Elemente, wie Animationen oder Grafiken, enthalten, um die Aufmerksamkeit der Kinder zu fördern(2).
+- A6: Das System muss eine Farbpalette bieten, die speziell auf die Bedürfnisse von Kindern mit Sehbeeinträchtigungen abgestimmt ist(2),(4).
+- A7: Das System muss die Möglichkeit bieten, spielerische Elemente einzubauen, um die Motivation der Kinder zu steigern (3).
+- A8: Das System muss eine Funktion zum Speichern und Wiederholen von abgeschlossenen spielerischen Lernmodulen enthalten(3).
 A9: Das System muss farbenfrohe und kreative Lernmethoden bieten, um den kreativen Ausdruck der Kinder anzuregen (4).
 A10: Das System sollte bewegte Farben und Animationen verwenden, um die Aufmerksamkeit der Kinder zu fördern(4),(2).
 A11: Das System muss eine leicht zugängliche Benutzeroberfläche bereitstellen, um eine einfache Bedienung für Kinder zu ermöglichen (5).
