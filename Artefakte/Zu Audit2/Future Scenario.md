@@ -1,0 +1,13 @@
+## Persona 1:
+### Future Scenario
+In der neuen Schule ist Kilian anfangs nervös, weil er nicht sicher ist, wie gut er mit dem Unterrichtsstoff mithalten kann. Durch seine Klassenlehrerin, die sich besonders um Kinder mit Einschränkungen kümmert, hat Kilian eine neue Lern Plattform gefunden. Kilian fühlt sich zum ersten Mal richtig verstanden und unterstützt. Die Lern Plattform fordert ihn genau in seinem Tempo heraus, und er bemerkt kleine Fortschritte, die ihm Freude bereiten.
+Wenn er merkt, dass er mit Geduld und Übung wirklich besser wird, wächst sein Selbstvertrauen. Die Frustration, die er früher oft beim Lernen empfand, wird weniger. Jetzt fühlt er sich motiviert, weiterzumachen, weil er sieht, dass ihm das Lernen gelingt. Kilian spürt, dass er neue Fähigkeiten entwickeln kann, und das gibt ihm die Zuversicht, sich in der neuen Schule gut zurechtzufinden und weiterzulernen. Außerdem gefällt ihm die Arbeit mit dem Tablet sehr gut, da er von seinen Lehrern Individuelle Übungen zugeteilt bekommt, welche er dann über den QR-Code direkt bearbeiten kann.
+
+## Persona 2:
+### Future Szenario
+Thomas hat an mehreren Sprachtherapien und Förderprogrammen teilgenommen, doch leider zeigen diese keine nennenswerten Fortschritte. Er möchte auch zu Hause daran arbeiten können und hat nun eine Lern Plattform entdeckt, wodurch er seine Wort-und Schrift Fähigkeiten verbessern kann. Er hat keine Schwierigkeiten dabei die Plattform zu bedienen, da sie sehr einfach und farbenfroh gestaltet ist. Er merkt, dass das Lernen nun weniger stressig ist, da die Plattform ihm die Inhalte in kurzen, verständlichen Schritten vermittelt. Thomas fühlt sich zum ersten Mal motiviert, seine Rechtschreibung eigenständig zu verbessern, weil er spürt, dass er kleine Fortschritte macht. Er beginnt, regelmäßig zu üben und entdeckt dabei sogar Freude am Lernen. Das gibt ihm Zuversicht und ein wachsendes Interesse daran, weiter an seiner Wort- und Schrift Fähigkeit zu arbeiten.
+
+## Persona 3:
+### Future Scenario
+Leandra sitzt zu Hause mit ihrem iPad und arbeitet an ihren Übungsaufgaben. Sie ist begeistert, weil sie die Aufgaben auf ihre eigene Weise lösen kann, indem Sie Rechenaufgaben löst. Ihre Unruhe und Impulsivität sind nicht mehr hinderlich, was ihr sehr viel Freude bereitet. Sie fühlt sich stolz, wenn sie sieht, wie ihre Aufgaben Schritt für Schritt wachsen und ihr Wissen sich verbessert.
+Auch ihre Eltern bemerken eine positive Veränderung. Sie sind erleichtert, dass Leandra sich jetzt viel konzentrierter und motivierter zeigt. Sie sehen, dass das Lernen für sie weniger stressig und frustrierend ist. Sie sind froh, dass es endlich eine Methode gibt, die sie anspricht und freuen sich über die Fortschritte, die sie macht.
