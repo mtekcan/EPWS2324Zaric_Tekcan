@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rechnen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f7ff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            margin: auto;
+            padding: 20px;
+            max-width: 400px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .blocks {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .block {
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            background-color: #6b5b95;
+            border-radius: 5px;
+        }
+
+        .block.gray {
+            background-color: #d3d3d3;
+        }
+
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .answers {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .answer {
+            padding: 10px 20px;
+            background-color: #f3d9df;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .answer:hover {
+            background-color: #e5b3b8;
+        }
+
+        .footer {
+            text-align: center;
+        }
+
+        .back-button {
+            margin-top: auto;
+            margin-bottom: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #d4af37;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .back-button:hover {
+            background-color: #b68b2b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rechnen</h1>
+        <div class="blocks" id="blocks"></div>
+        <div class="question" id="question"></div>
+        <div class="answers" id="answers"></div>
+    </div>
+    <div class="footer">
+        <a href="index.html" class="back-button">Zurück zur Startseite</a>
+    </div>
+
+    <script>
+        // Aufgabenliste
+        const tasks = [
+            { question: "5 + 2 =", correct: 7, options: [6, 7, 10, 4] },
+            { question: "3 + 4 =", correct: 7, options: [5, 7, 9, 6] },
+            { question: "6 + 3 =", correct: 9, options: [8, 9, 10, 7] },
+            { question: "2 + 5 =", correct: 7, options: [7, 8, 6, 5] },
+            { question: "1 + 1 =", correct: 2, options: [3, 1, 0, 2] }
+        ];
+
+        let currentTask = 0;
+
+        function loadTask() {
+            // Zeige aktuelle Aufgabe
+            const task = tasks[currentTask];
+            document.getElementById("question").innerText = task.question;
+
+            // Zeige Blöcke
+            const blocksContainer = document.getElementById("blocks");
+            blocksContainer.innerHTML = ""; // Lösche vorherige Blöcke
+            for (let i = 0; i < 10; i++) {
+                const block = document.createElement("div");
+                block.className = i < task.correct ? "block" : "block gray";
+                blocksContainer.appendChild(block);
+            }
+
+            // Zeige Antwortmöglichkeiten
+            const answersContainer = document.getElementById("answers");
+            answersContainer.innerHTML = ""; // Lösche vorherige Antworten
+            task.options.forEach(option => {
+                const answerButton = document.createElement("div");
+                answerButton.className = "answer";
+                answerButton.innerText = option;
+                answerButton.onclick = () => checkAnswer(option);
+                answersContainer.appendChild(answerButton);
+            });
+        }
+
+        function checkAnswer(answer) {
+            const task = tasks[currentTask];
+            if (answer === task.correct) {
+                alert("Richtig!");
+            } else {
+                alert("Falsch! Die richtige Antwort war " + task.correct);
+            }
+            // Lade nächste Aufgabe oder beende das Spiel
+            currentTask++;
+            if (currentTask < tasks.length) {
+                loadTask();
+            } else {
+                alert("Du hast alle Aufgaben bearbeitet!");
+                // Zurück zur Startseite oder neu laden
+                window.location.href = "index.html";
+            }
+        }
+
+        // Erste Aufgabe laden
+        loadTask();
+    </script>
+</body>
+</html>
