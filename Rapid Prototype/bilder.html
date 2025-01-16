@@ -31,6 +31,7 @@
       justify-content: center;
       gap: 20px;
       margin: 20px 0;
+      flex-wrap: wrap;
     }
     .images img {
       width: 100px;
@@ -38,39 +39,17 @@
       border: 2px solid transparent;
       border-radius: 8px;
       cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
     }
     .images img:hover {
       transform: scale(1.1);
-      transition: transform 0.2s;
+      border-color: #6200ea;
     }
     .text {
       font-size: 18px;
       font-weight: bold;
       color: #555;
     }
-    .arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: #6200ea;
-      color: white;
-      border: none;
-      padding: 15px;
-      font-size: 20px;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-    .arrow:hover {
-      background-color: #3700b3;
-    }
-    .arrow-left {
-      left: -50px;
-    }
-    .arrow-right {
-      right: -50px;
-    }
-
-    /* Footer-Button */
     .back-button {
       position: fixed;
       bottom: 20px;
@@ -86,7 +65,7 @@
       cursor: pointer;
     }
     .back-button:hover {
-      background-color: #b68b2b;
+      background-color: #8e681e;
     }
   </style>
 </head>
@@ -104,29 +83,42 @@
 
   <script>
     const tasks = [
-      { question: "Pfirsich", images: ["Pfirsich", "Banane", "Erdbeere", "Apfel"], correct: "Pfirsich" },
-      { question: "Banane", images: ["Apfel", "Banane", "Erdbeere", "Pfirsich"], correct: "Banane" },
-      { question: "Erdbeere", images: ["Erdbeere", "Pfirsich", "Banane", "Apfel"], correct: "Erdbeere" },
-      { question: "Apfel", images: ["Pfirsich", "Apfel", "Banane", "Erdbeere"], correct: "Apfel" },
+      { 
+        question: "Pfirsich", 
+        images: [
+          { name: "Pfirsich", url: "https://media.istockphoto.com/id/533241284/de/foto/peach-isoliert-auf-weiß.jpg?s=1024x1024&w=is&k=20&c=UoaFXjPX0zasRgCTvg5S4Ry6zU-DvC4l_-imkPGpwoY=" },
+          { name: "Banane", url: "https://media.istockphoto.com/id/157375066/de/foto/banana-clipping-path.jpg?s=1024x1024&w=is&k=20&c=Xq0Lkta6sAWUhuaISxxO4iWhakBKXisbL_Nlu-vUr4I=" },
+          { name: "Erdbeere", url: "https://media.istockphoto.com/id/1443197738/de/foto/erdbeeren-isoliert-erdbeerscheibe-und-vollkornbeerenisolat-zwei-erdbeeren-auf-weißem.jpg?s=1024x1024&w=is&k=20&c=bkrKqBPZxIetS2FlIZs64U_cg0RlIEx_yoEQQpA1BHo=" },
+          { name: "Apfel", url: "https://media.istockphoto.com/id/532048136/de/foto/frischen-roten-apfel-isoliert-auf-weiß-mit-clipping-path.jpg?s=1024x1024&w=is&k=20&c=kFtuhfrrvyJ1Ver3XJEWj331J4ff8CGrhQAt8PEiBQ0=" }
+        ],
+        correct: "Pfirsich"
+      },
+      { 
+        question: "Banane", 
+        images: [
+          { name: "Apfel", url: "https://media.istockphoto.com/id/532048136/de/foto/frischen-roten-apfel-isoliert-auf-weiß-mit-clipping-path.jpg?s=1024x1024&w=is&k=20&c=kFtuhfrrvyJ1Ver3XJEWj331J4ff8CGrhQAt8PEiBQ0=" },
+          { name: "Banane", url: "https://media.istockphoto.com/id/157375066/de/foto/banana-clipping-path.jpg?s=1024x1024&w=is&k=20&c=Xq0Lkta6sAWUhuaISxxO4iWhakBKXisbL_Nlu-vUr4I=" },
+          { name: "Erdbeere", url: "https://media.istockphoto.com/id/1443197738/de/foto/erdbeeren-isoliert-erdbeerscheibe-und-vollkornbeerenisolat-zwei-erdbeeren-auf-weißem.jpg?s=1024x1024&w=is&k=20&c=bkrKqBPZxIetS2FlIZs64U_cg0RlIEx_yoEQQpA1BHo=" },
+          { name: "Pfirsich", url: "https://media.istockphoto.com/id/533241284/de/foto/peach-isoliert-auf-weiß.jpg?s=1024x1024&w=is&k=20&c=UoaFXjPX0zasRgCTvg5S4Ry6zU-DvC4l_-imkPGpwoY=" }
+        ],
+        correct: "Banane"
+      }
     ];
 
     const imagesContainer = document.getElementById("images");
     const questionText = document.getElementById("question-text");
 
-    let currentTaskIndex = 0;
+    let currentTaskIndex = localStorage.getItem('currentTaskIndex') || 0;
 
     function loadTask() {
-      // Aktuelle Aufgabe laden
       const task = tasks[currentTaskIndex];
       questionText.textContent = task.question;
-
-      // Bilder hinzufügen
-      imagesContainer.innerHTML = ""; // Vorherige Bilder löschen
+      imagesContainer.innerHTML = "";
       task.images.forEach((image) => {
         const img = document.createElement("img");
-        img.src = `https://via.placeholder.com/100?text=${image}`;
-        img.alt = image;
-        img.onclick = () => checkAnswer(image); // Antwort überprüfen
+        img.src = image.url;
+        img.alt = image.name;
+        img.onclick = () => checkAnswer(image.name);
         imagesContainer.appendChild(img);
       });
     }
@@ -135,15 +127,20 @@
       const task = tasks[currentTaskIndex];
       if (selectedImage === task.correct) {
         alert("Richtig!");
+        let progress = JSON.parse(localStorage.getItem("progress")) || { bilder: { correct: 0, incorrect: 0 } };
+        progress.bilder.correct++;
+        localStorage.setItem('progress', JSON.stringify(progress));
       } else {
-        alert("Falsch! Versuch's nochmal.");
+        alert("Falsch! Lies dir die Aufgabenstellung nochmal durch.");
+        let progress = JSON.parse(localStorage.getItem("progress")) || { bilder: { correct: 0, incorrect: 0 } };
+        progress.bilder.incorrect++;
+        localStorage.setItem('progress', JSON.stringify(progress));
       }
-      // Nächste Aufgabe laden
-      currentTaskIndex = (currentTaskIndex + 1) % tasks.length; // Zyklisch durch die Aufgaben
+      currentTaskIndex = (parseInt(currentTaskIndex) + 1) % tasks.length;
+      localStorage.setItem('currentTaskIndex', currentTaskIndex);
       loadTask();
     }
 
-    // Erste Aufgabe laden
     loadTask();
   </script>
 </body>

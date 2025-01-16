@@ -175,6 +175,26 @@
       green: 0
     };
 
+    // Fortschritt speichern
+    function updateProgress(isCorrect) {
+      let progress = JSON.parse(localStorage.getItem("progress")) || {
+        rechnen: { correct: 0, incorrect: 0 },
+        farben: { correct: 0, incorrect: 0 },
+        bilder: { correct: 0, incorrect: 0 },
+        lesen: { correct: 0, incorrect: 0 }
+      };
+
+      // Fortschritt aktualisieren
+      if (isCorrect) {
+        progress.farben.correct++;
+      } else {
+        progress.farben.incorrect++;
+      }
+
+      // Speichern in LocalStorage
+      localStorage.setItem("progress", JSON.stringify(progress));
+    }
+
     function allowDrop(event) {
       event.preventDefault();
     }
@@ -189,25 +209,23 @@
       const draggedElement = document.getElementById(draggedElementId);
       const dropzoneClass = event.target.classList[1];
 
-      // Überprüfen, ob die Farbe des gezogenen Kreises mit der Aufgabe übereinstimmt
       if (tasks[taskIndex].correctColors.includes(dropzoneClass) &&
           draggedElement.classList.contains(dropzoneClass)) {
-        
         event.target.appendChild(draggedElement);
         completedCircles[dropzoneClass]++;
+        updateProgress(true); // Fortschritt: richtig
         alert("Richtig platziert!");
 
-        // Überprüfen, ob alle Kreise der aktuellen Aufgabe abgelegt wurden
         if (isGameCompleted()) {
           nextTask();
         }
       } else {
+        updateProgress(false); // Fortschritt: falsch
         alert("Falsch! Bitte lies nochmal die Aufgabe.");
       }
     }
 
     function isGameCompleted() {
-      // Überprüfen, ob für jede Farbe alle entsprechenden Kreise abgelegt wurden
       const correctColors = tasks[taskIndex].correctColors;
       let allCorrect = true;
 
@@ -222,34 +240,21 @@
     }
 
     function nextTask() {
-      // Aufgabenstellung ändern
       taskIndex = (taskIndex + 1) % tasks.length;
       document.getElementById("task").innerText = tasks[taskIndex].description;
-
-      // Zurücksetzen der Fortschritte für die Aufgabe
-      completedCircles = {
-        red: 0,
-        yellow: 0,
-        blue: 0,
-        green: 0
-      };
-
-      // Das Spiel zurücksetzen
+      completedCircles = { red: 0, yellow: 0, blue: 0, green: 0 };
       resetGame();
     }
 
     function resetGame() {
-      // Zurücksetzen der Positionen der Kreise
       const circles = document.querySelectorAll(".circle");
       circles.forEach(circle => {
-        circle.style.order = Math.floor(Math.random() * circles.length);
-        circle.style.display = "inline-block"; // Sicherstellen, dass die Kreise wieder sichtbar sind
+        document.querySelector(".circle-container").appendChild(circle);
       });
 
-      // Leeren der Dropzonen und zurücksetzen des Texts
       const dropzones = document.querySelectorAll(".dropzone");
       dropzones.forEach(zone => {
-        zone.innerHTML = zone.classList[1]; // Text (z.B. "Rot") beibehalten
+        zone.innerHTML = zone.classList[1];
       });
     }
   </script>

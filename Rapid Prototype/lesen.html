@@ -48,7 +48,7 @@
     .puzzle-piece {
       width: 100px;
       height: 80px;
-      background-color: #f7941e; /* Einheitliche Farbe */
+      background-color: #f7941e; 
       color: #fff;
       font-size: 18px;
       font-weight: bold;
@@ -59,34 +59,6 @@
       cursor: grab;
       position: relative;
       border: 2px solid #333;
-    }
-
-    /* Individuelle Puzzlestücke: Einheitliche "Zähne" */
-    .puzzle-piece::before,
-    .puzzle-piece::after {
-      content: '';
-      position: absolute;
-      background-color: inherit;
-    }
-
-    .puzzle-piece::before {
-      width: 30px;
-      height: 20px;
-      top: -10px;
-      left: 35px;
-      border-radius: 0 0 15px 15px;
-      border: 2px solid #333;
-      border-bottom: none;
-    }
-
-    .puzzle-piece::after {
-      width: 20px;
-      height: 30px;
-      right: -10px;
-      top: 25px;
-      border-radius: 15px 15px 0 0;
-      border: 2px solid #333;
-      border-left: none;
     }
 
     .drop-zone {
@@ -108,9 +80,42 @@
       margin-top: 20px;
       display: none;
     }
+
+    .incorrect-message {
+      font-size: 18px;
+      font-weight: bold;
+      color: red;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .footer {
+      width: 100%;
+      text-align: center;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .back-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #d4af37;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .back-button:hover {
+      background-color: #b68b2b;
+    }
   </style>
 </head>
 <body>
+
   <div class="container">
     <h2>Lesen Übung:</h2>
     <p>Setze die Puzzlestücke zusammen und ziehe sie auf die Linie</p>
@@ -118,17 +123,21 @@
     <div class="drop-zone" id="dropZone">Ziehe die Puzzlestücke hierher</div>
     <div class="puzzle-container" id="puzzleContainer"></div>
     <div class="correct-message" id="correctMessage">Richtig! Die nächste Aufgabe wird geladen...</div>
+    <div class="incorrect-message" id="incorrectMessage">Falsch! Die nächste Aufgabe wird geladen...</div>
   </div>
+
   <div class="footer">
     <a href="index.html" class="back-button">Zurück zur Startseite</a>
-</div>
+  </div>
+
   <script>
-    const wordBank = ["Schokolade", "Katzen", "Schule", "Hausaufgaben", "Computer", "Lernen"];
+    const wordBank = ["Schokolade", "Katze", "Schule", "Hausaufgaben", "Computer", "Lernen", "Lesen", "Kind"];
     let currentTask = null;
 
     const dropZone = document.getElementById("dropZone");
     const puzzleContainer = document.getElementById("puzzleContainer");
     const correctMessage = document.getElementById("correctMessage");
+    const incorrectMessage = document.getElementById("incorrectMessage");
 
     function shuffleArray(array) {
       return array.sort(() => Math.random() - 0.5);
@@ -136,7 +145,7 @@
 
     function splitWordIntoPieces(word) {
       const length = word.length;
-      const pieceCount = Math.floor(Math.random() * (4 - 2 + 1)) + 2; // 2 bis 4 Teile
+      const pieceCount = Math.floor(Math.random() * (4 - 2 + 1)) + 2;
       const pieceLengths = Array(pieceCount).fill(Math.floor(length / pieceCount));
       for (let i = 0; i < length % pieceCount; i++) {
         pieceLengths[i]++;
@@ -181,8 +190,15 @@
       const pieceId = e.dataTransfer.getData("text");
       const piece = document.getElementById(pieceId);
       dropZone.appendChild(piece);
-      checkCorrect();
+      checkCompletion();
     });
+
+    function checkCompletion() {
+      const piecesInDropZone = Array.from(dropZone.children).length;
+      if (piecesInDropZone === currentTask.pieces.length) {
+        checkCorrect();
+      }
+    }
 
     function checkCorrect() {
       const piecesInDropZone = Array.from(dropZone.children)
@@ -195,6 +211,13 @@
           correctMessage.style.display = "none";
           loadRandomTask();
         }, 2000);
+      } else {
+        incorrectMessage.style.display = "block";
+        setTimeout(() => {
+          incorrectMessage.style.display = "none";
+          dropZone.innerHTML = "Ziehe die Puzzlestücke hierher";
+          loadRandomTask();
+        }, 2000);
       }
     }
 
@@ -202,3 +225,9 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+

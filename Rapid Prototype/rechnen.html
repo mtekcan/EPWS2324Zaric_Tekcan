@@ -118,23 +118,43 @@
 
         let currentTask = 0;
 
+        // Fortschritt speichern
+        function updateProgress(isCorrect) {
+            let progress = JSON.parse(localStorage.getItem("progress")) || {
+                rechnen: { correct: 0, incorrect: 0 },
+                farben: { correct: 0, incorrect: 0 },
+                bilder: { correct: 0, incorrect: 0 },
+                lesen: { correct: 0, incorrect: 0 }
+            };
+
+            // Aktualisiere Fortschritt
+            if (isCorrect) {
+                progress.rechnen.correct++;
+            } else {
+                progress.rechnen.incorrect++;
+            }
+
+            // Speichere Fortschritt in LocalStorage
+            localStorage.setItem("progress", JSON.stringify(progress));
+        }
+
+        // Aufgabe laden
         function loadTask() {
-            // Zeige aktuelle Aufgabe
             const task = tasks[currentTask];
             document.getElementById("question").innerText = task.question;
 
-            // Zeige Blöcke
+            // Blöcke anzeigen
             const blocksContainer = document.getElementById("blocks");
-            blocksContainer.innerHTML = ""; // Lösche vorherige Blöcke
+            blocksContainer.innerHTML = "";
             for (let i = 0; i < 10; i++) {
                 const block = document.createElement("div");
                 block.className = i < task.correct ? "block" : "block gray";
                 blocksContainer.appendChild(block);
             }
 
-            // Zeige Antwortmöglichkeiten
+            // Antwortmöglichkeiten anzeigen
             const answersContainer = document.getElementById("answers");
-            answersContainer.innerHTML = ""; // Lösche vorherige Antworten
+            answersContainer.innerHTML = "";
             task.options.forEach(option => {
                 const answerButton = document.createElement("div");
                 answerButton.className = "answer";
@@ -144,21 +164,24 @@
             });
         }
 
+        // Antwort überprüfen
         function checkAnswer(answer) {
             const task = tasks[currentTask];
             if (answer === task.correct) {
                 alert("Richtig!");
+                updateProgress(true); // Fortschritt: richtig
             } else {
                 alert("Falsch! Die richtige Antwort war " + task.correct);
+                updateProgress(false); // Fortschritt: falsch
             }
-            // Lade nächste Aufgabe oder beende das Spiel
+
+            // Nächste Aufgabe oder Ende
             currentTask++;
             if (currentTask < tasks.length) {
                 loadTask();
             } else {
                 alert("Du hast alle Aufgaben bearbeitet!");
-                // Zurück zur Startseite oder neu laden
-                window.location.href = "index.html";
+                window.location.href = "lernfortschritt.html"; // Zur Lernfortschritt-Seite weiterleiten
             }
         }
 
