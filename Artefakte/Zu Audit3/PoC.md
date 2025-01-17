@@ -1,7 +1,8 @@
 ## Proof-of-Concept für eine barrierefreie Lernplattform für Kinder mit Down-Syndrom
+-
 Ziel:
 Erstellung einer prototypischen Lernplattform, die Kindern mit Down-Syndrom ermöglicht, interaktive Lerninhalte barrierefrei zu nutzen. Die Plattform soll QR-Code-gestützt sein, alters- und fähigkeitsgerechte Übungen bieten und einfache Interaktionen wie Tippen, Wischen und Drag & Drop unterstützen.
------
+-
 Fokusbereich für das PoC:
 QR-Code-Authentifizierung und Laden personalisierter Inhalte.
 Anzeige einer Übung mit visuellen und auditiven Feedbackmechanismen.
