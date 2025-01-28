@@ -18,21 +18,21 @@ Kann die Zielgruppe mit so etwas arbeiten? Blut noch Begründen, wieso Ja oder N
 Sinnvoller Ergänzung von Erklärungen Fehlt. (Auf Jeden Fall Ergänzen)
 
 ## Farben.html:
-Der Satz „Ziehe nur die Roten und Gelben Kreise auf die gleichfarbige große Fläche“
+- Der Satz „Ziehe nur die Roten und Gelben Kreise auf die gleichfarbige große Fläche“
 Gleichfaarbig passt nicht für die Zielgruppe
-Man könnte auch als Farbige Kreise z.b Obst oder Andere Farbige sachen, die man als Übung hinzufügen kann.
-Pädagogin Bücher durchstöbern für weiter Farben aufgaben.
+- Man könnte auch als Farbige Kreise z.b Obst oder Andere Farbige sachen, die man als Übung hinzufügen kann.
+- Bücher durchstöbern für weiter Farben aufgaben.
 
-## Computer:
-Silbentrennung!
-Aufgabe besser implementieren. 
-Lesen Aufgaben
-ERKLÄRUNG Hinzufügen!
+## Puzzle Aufgabe:
+- Silbentrennung!
+- Aufgabe besser implementieren. 
+- Lesen Aufgaben
+- ERKLÄRUNG Hinzufügen, wenn falsch oder richtig!
 
 ## Erfüllte PoC:
-Alles ergänzen was im Feedback mitgeteilt wurde.
-Für ein Beispiel ein API finden und einbinden. Also nicht für alle Aufgaben sondern nur für eins wie z.B für Rechenaufgaben.
-Wenn man keine API finden, dann eine Taktik finden, wie man den Kinder Feedbacks geben kann und den Code nicht Hardgecoded 
+- Alles ergänzen was im Feedback mitgeteilt wurde.
+- Für ein Beispiel ein API finden und einbinden. Also nicht für alle Aufgaben sondern nur für eins wie z.B für Rechenaufgaben.
+- Wenn man keine API finden, dann eine Taktik finden, wie man den Kinder Feedbacks geben kann und den Code nicht Hardgecoded 
 
 ## HTA:
 3-5 
