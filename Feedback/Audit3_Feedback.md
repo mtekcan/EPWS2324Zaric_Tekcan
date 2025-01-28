@@ -35,4 +35,4 @@ Gleichfaarbig passt nicht für die Zielgruppe
 - Wenn man keine API finden, dann eine Taktik finden, wie man den Kinder Feedbacks geben kann und den Code nicht Hardgecoded 
 
 ## HTA:
-3-5 
+- 3-5 
