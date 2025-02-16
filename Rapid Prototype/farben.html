@@ -18,6 +18,7 @@
 
     main {
       flex: 1;
+      position: relative;
     }
 
     h1 {
@@ -52,21 +53,10 @@
       color: white;
     }
 
-    .red {
-      background-color: #e74c3c;
-    }
-
-    .blue {
-      background-color: #3498db;
-    }
-
-    .green {
-      background-color: #2ecc71;
-    }
-
-    .yellow {
-      background-color: #f1c40f;
-    }
+    .red { background-color: #e74c3c; }
+    .blue { background-color: #3498db; }
+    .green { background-color: #2ecc71; }
+    .yellow { background-color: #f1c40f; }
 
     .circle-container {
       display: flex;
@@ -76,10 +66,9 @@
       margin-top: 20px;
     }
 
-    .circle {
+    .item {
       width: 50px;
       height: 50px;
-      border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -87,48 +76,35 @@
       font-weight: bold;
       color: white;
       cursor: grab;
+      border-radius: 50%;
     }
 
-    .circle.red {
-      background-color: #e74c3c;
+    .item.red { background-color: #e74c3c; }
+    .item.blue { background-color: #3498db; }
+    .item.green { background-color: #2ecc71; }
+    .item.yellow { background-color: #f1c40f; }
+
+    .hidden { display: none; }
+
+    .nav-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #007bff;
     }
 
-    .circle.blue {
-      background-color: #3498db;
-    }
-
-    .circle.green {
-      background-color: #2ecc71;
-    }
-
-    .circle.yellow {
-      background-color: #f1c40f;
-    }
-
-    footer {
-      background-color: #f9f7ff;
-      padding: 20px;
-    }
-
-    .back-button {
-      padding: 10px 20px;
-      font-size: 16px;
-      color: white;
-      text-decoration: none;
-      background-color: #d4af37;
-      border-radius: 5px;
-      display: inline-block;
-    }
-
-    .back-button:hover {
-      background-color: #b68b2b;
-    }
+    .nav-button.left { left: 10px; }
+    .nav-button.right { right: 10px; }
   </style>
 </head>
 <body>
   <main>
     <h1>Farben</h1>
-    <p class="instruction" id="task">Zieh nur die Roten und Gelben Kreise auf die gleichfarbige große Fläche</p>
+    <p class="instruction" id="task">Ziehe die Kreise zur richtigen Farbe</p>
 
     <div class="container">
       <div class="dropzone red" ondrop="drop(event)" ondragover="allowDrop(event)">Rot</div>
@@ -137,14 +113,22 @@
       <div class="dropzone yellow" ondrop="drop(event)" ondragover="allowDrop(event)">Gelb</div>
     </div>
 
-    <div class="circle-container">
-      <div class="circle red" draggable="true" ondragstart="drag(event)" id="red1"></div>
-      <div class="circle yellow" draggable="true" ondragstart="drag(event)" id="yellow1"></div>
-      <div class="circle blue" draggable="true" ondragstart="drag(event)" id="blue1"></div>
-      <div class="circle green" draggable="true" ondragstart="drag(event)" id="green1"></div>
-      <div class="circle red" draggable="true" ondragstart="drag(event)" id="red2"></div>
-      <div class="circle yellow" draggable="true" ondragstart="drag(event)" id="yellow2"></div>
+    <div class="circle-container" id="task1">
+      <div class="item red" draggable="true" ondragstart="drag(event)" id="red1"></div>
+      <div class="item yellow" draggable="true" ondragstart="drag(event)" id="yellow1"></div>
+      <div class="item blue" draggable="true" ondragstart="drag(event)" id="blue1"></div>
+      <div class="item green" draggable="true" ondragstart="drag(event)" id="green1"></div>
     </div>
+
+    <div class="circle-container hidden" id="task2">
+      <div class="item red" draggable="true" ondragstart="drag(event)" id="apple">🍎</div>
+      <div class="item yellow" draggable="true" ondragstart="drag(event)" id="banana">🍌</div>
+      <div class="item blue" draggable="true" ondragstart="drag(event)" id="blueberry">🫐</div>
+      <div class="item green" draggable="true" ondragstart="drag(event)" id="pear">🍐</div>
+    </div>
+
+    <button class="nav-button left" onclick="prevTask()">⬅</button>
+    <button class="nav-button right" onclick="nextTask()">➡</button>
   </main>
 
   <footer>
@@ -152,47 +136,22 @@
   </footer>
 
   <script>
-    let taskIndex = 0;
-    const tasks = [
-      {
-        description: "Zieh nur die Roten und Gelben Kreise auf die gleichfarbige große Fläche",
-        correctColors: ["red", "yellow"]
-      },
-      {
-        description: "Zieh nur die Grünen und Blauen Kreise auf die gleichfarbige große Fläche",
-        correctColors: ["green", "blue"]
-      },
-      {
-        description: "Zieh nur die Roten und Grünen Kreise auf die gleichfarbige große Fläche",
-        correctColors: ["red", "green"]
-      }
-    ];
+    let currentTask = 1;
+    function showTask(taskNumber) {
+      document.getElementById("task1").classList.add("hidden");
+      document.getElementById("task2").classList.add("hidden");
+      document.getElementById("task").innerText = taskNumber === 1 ? "Ziehe die Kreise zur richtigen Farbe" : "Ziehe die Obstsorten zur richtigen Farbe";
+      document.getElementById(`task${taskNumber}`).classList.remove("hidden");
+    }
 
-    let completedCircles = {
-      red: 0,
-      yellow: 0,
-      blue: 0,
-      green: 0
-    };
+    function nextTask() {
+      currentTask = currentTask === 1 ? 2 : 1;
+      showTask(currentTask);
+    }
 
-    // Fortschritt speichern
-    function updateProgress(isCorrect) {
-      let progress = JSON.parse(localStorage.getItem("progress")) || {
-        rechnen: { correct: 0, incorrect: 0 },
-        farben: { correct: 0, incorrect: 0 },
-        bilder: { correct: 0, incorrect: 0 },
-        lesen: { correct: 0, incorrect: 0 }
-      };
-
-      // Fortschritt aktualisieren
-      if (isCorrect) {
-        progress.farben.correct++;
-      } else {
-        progress.farben.incorrect++;
-      }
-
-      // Speichern in LocalStorage
-      localStorage.setItem("progress", JSON.stringify(progress));
+    function prevTask() {
+      currentTask = currentTask === 1 ? 2 : 1;
+      showTask(currentTask);
     }
 
     function allowDrop(event) {
@@ -209,54 +168,13 @@
       const draggedElement = document.getElementById(draggedElementId);
       const dropzoneClass = event.target.classList[1];
 
-      if (tasks[taskIndex].correctColors.includes(dropzoneClass) &&
-          draggedElement.classList.contains(dropzoneClass)) {
+      if (draggedElement.classList.contains(dropzoneClass)) {
         event.target.appendChild(draggedElement);
-        completedCircles[dropzoneClass]++;
-        updateProgress(true); // Fortschritt: richtig
-        alert("Richtig platziert!");
-
-        if (isGameCompleted()) {
-          nextTask();
-        }
       } else {
-        updateProgress(false); // Fortschritt: falsch
-        alert("Falsch! Bitte lies nochmal die Aufgabe.");
+        alert("Falsch! Bitte ziehe das Objekt zur passenden Farbe.");
       }
-    }
-
-    function isGameCompleted() {
-      const correctColors = tasks[taskIndex].correctColors;
-      let allCorrect = true;
-
-      correctColors.forEach(color => {
-        const expectedCount = document.querySelectorAll(`.circle.${color}`).length;
-        if (completedCircles[color] !== expectedCount) {
-          allCorrect = false;
-        }
-      });
-
-      return allCorrect;
-    }
-
-    function nextTask() {
-      taskIndex = (taskIndex + 1) % tasks.length;
-      document.getElementById("task").innerText = tasks[taskIndex].description;
-      completedCircles = { red: 0, yellow: 0, blue: 0, green: 0 };
-      resetGame();
-    }
-
-    function resetGame() {
-      const circles = document.querySelectorAll(".circle");
-      circles.forEach(circle => {
-        document.querySelector(".circle-container").appendChild(circle);
-      });
-
-      const dropzones = document.querySelectorAll(".dropzone");
-      dropzones.forEach(zone => {
-        zone.innerHTML = zone.classList[1];
-      });
     }
   </script>
 </body>
 </html>
+
