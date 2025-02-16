@@ -40,11 +40,6 @@
       gap: 10px;
     }
 
-    .drop-zone.highlight {
-      background-color: #d4f4dd;
-      border-color: #2e7d32;
-    }
-
     .puzzle-container {
       display: flex;
       justify-content: center;
@@ -66,16 +61,29 @@
       justify-content: center;
       align-items: center;
       cursor: grab;
-      position: relative;
       border: 2px solid #333;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h2>Lesen Übung:</h2>
+    <h2>Lesen Übung</h2>
     <p>Setze die Puzzlestücke zusammen und ziehe sie auf die Linie</p>
+
+    <label for="category">Wähle eine Kategorie:</label>
+    <select id="category">
+      <option value="farben">Farben</option>
+      <option value="haushalt">Haushalt</option>
+      <option value="tiere">Tiere</option>
+      <option value="pflanzen">Pflanzen</option>
+    </select>
 
     <div class="drop-zone" id="dropZone">Ziehe die Puzzlestücke hierher</div>
     <div class="puzzle-container" id="puzzleContainer"></div>
@@ -88,16 +96,21 @@
     const puzzleContainer = document.getElementById("puzzleContainer");
     const correctMessage = document.getElementById("correctMessage");
     const incorrectMessage = document.getElementById("incorrectMessage");
+    const categorySelect = document.getElementById("category");
+
     let currentTask = null;
 
-    const easyWords = [
-      "Ma-ma", "Pa-pa", "Fo-to", "Woh-nung", "Au-to", "Ku-chen", "Ga-bel", "Kat-ze", "Tep-pich", "Na-gel",
-      "Blu-me", "Ap-fel", "Ba-na-ne", "En-te", "Ba-na-ne", "Son-ne", "Ha-se", "Mes-ser", "Löf-fel", "Tel-ler",
-      "Vo-gel", "Fens-ter", "Pa-pier","Wol-ke", "Fla-sche", "Lam-pe", "Tas-se", "Na-se","Ba-by", "Pup-pe", "Was-ser",
-    ];
+    // Wörter nach Kategorien
+    const wordsByCategory = {
+      farben: ["Vio-lett", "Ma-gen-ta", "La-vendel", "Li-la", "Oran-ge", "Ro-sa", "Dun-kel-blau", "Dun-kel-rot", "Dun-kel-grün"],
+      haushalt: ["Ta-sse", "Tel-ler", "Lam-pe", "Fens-ter", "Löf-fel", "Mes-ser", "Toas-ter", "Pfan-ne", "Tep-pich", "Be-cher", "Ga-bel", "Wasch-be-cken"],
+      tiere: ["Kat-ze", "Hun-d", "Lö-we", "Ti-ger", "Vo-gel", "Fi-sch", "Ha-se", "E-le-fant", "Gi-raf-fe", "Pan-da", "Ha-se", "En-te", "Spin-ne"],
+      pflanzen: ["Blu-me", "Tul-pe", "Apfel-baum", "Tan-ne", "Ro-se", "Tul-pe", "Kak-tus", "Son-nen-blume"]
+    };
 
-    function getRandomEasyWord() {
-      return easyWords[Math.floor(Math.random() * easyWords.length)];
+    function getRandomWord(category) {
+      const words = wordsByCategory[category];
+      return words[Math.floor(Math.random() * words.length)];
     }
 
     function splitWordIntoSyllables(word) {
@@ -109,7 +122,8 @@
       dropZone.innerHTML = "Ziehe die Puzzlestücke hierher";
       dropZone.classList.remove("highlight");
 
-      const randomWord = getRandomEasyWord();
+      const selectedCategory = categorySelect.value;
+      const randomWord = getRandomWord(selectedCategory);
       const pieces = splitWordIntoSyllables(randomWord);
       currentTask = { word: randomWord.replace(/-/g, ""), pieces };
 
@@ -179,9 +193,14 @@
       if (dropZone.children.length === 0 || piecesInDropZone.length > 0) {
         dropZone.innerHTML = "Ziehe die Puzzlestücke hierher";
       }
-    }, 2000);
+    }, 5000);
   }
 }
+    
+    // Neue Aufgabe laden, wenn Kategorie geändert wird
+    categorySelect.addEventListener("change", loadRandomTask);
+
+    // Erste Aufgabe laden
     loadRandomTask();
   </script>
 </body>
