@@ -26,14 +26,23 @@
       text-align: center;
     }
 
-    h2 {
-      font-size: 28px;
-      color: #333;
+    .drop-zone {
+      width: 90%;
+      min-height: 80px;
+      border: 2px dashed #333;
+      margin: 20px auto;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      color: #666;
+      font-size: 16px;
+      padding: 10px;
+      gap: 10px;
     }
 
-    p {
-      font-size: 16px;
-      color: #666;
+    .drop-zone.highlight {
+      background-color: #d4f4dd;
+      border-color: #2e7d32;
     }
 
     .puzzle-container {
@@ -48,7 +57,7 @@
     .puzzle-piece {
       width: 100px;
       height: 80px;
-      background-color: #f7941e; 
+      background-color: #f7941e;
       color: #fff;
       font-size: 18px;
       font-weight: bold;
@@ -60,58 +69,6 @@
       position: relative;
       border: 2px solid #333;
     }
-
-    .drop-zone {
-      width: 90%;
-      height: 100px;
-      border: 2px dashed #333;
-      margin: 20px auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #666;
-      font-size: 16px;
-    }
-
-    .correct-message {
-      font-size: 18px;
-      font-weight: bold;
-      color: green;
-      margin-top: 20px;
-      display: none;
-    }
-
-    .incorrect-message {
-      font-size: 18px;
-      font-weight: bold;
-      color: red;
-      margin-top: 20px;
-      display: none;
-    }
-
-    .footer {
-      width: 100%;
-      text-align: center;
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .back-button {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #d4af37;
-      border-radius: 5px;
-      color: white;
-      font-size: 16px;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .back-button:hover {
-      background-color: #b68b2b;
-    }
   </style>
 </head>
 <body>
@@ -122,112 +79,110 @@
 
     <div class="drop-zone" id="dropZone">Ziehe die Puzzlestücke hierher</div>
     <div class="puzzle-container" id="puzzleContainer"></div>
-    <div class="correct-message" id="correctMessage">Richtig! Die nächste Aufgabe wird geladen...</div>
-    <div class="incorrect-message" id="incorrectMessage">Falsch! Die nächste Aufgabe wird geladen...</div>
-  </div>
-
-  <div class="footer">
-    <a href="index.html" class="back-button">Zurück zur Startseite</a>
+    <div class="correct-message" id="correctMessage" style="display: none; color: green;">Richtig! 🎉 Die nächste Aufgabe wird geladen...</div>
+    <div class="incorrect-message" id="incorrectMessage" style="display: none; color: red;"> ❌Fast geschafft! Aber ein Stück ist noch nicht am richtigen Platz. Probier es nochmal – du schaffst das!</div>
   </div>
 
   <script>
-    const wordBank = ["Schokolade", "Katze", "Schule", "Hausaufgaben", "Computer", "Lernen", "Lesen", "Kind"];
-    let currentTask = null;
-
     const dropZone = document.getElementById("dropZone");
     const puzzleContainer = document.getElementById("puzzleContainer");
     const correctMessage = document.getElementById("correctMessage");
     const incorrectMessage = document.getElementById("incorrectMessage");
+    let currentTask = null;
 
-    function shuffleArray(array) {
-      return array.sort(() => Math.random() - 0.5);
+    const easyWords = [
+      "Ma-ma", "Pa-pa", "Fo-to", "Woh-nung", "Au-to", "Ku-chen", "Ga-bel", "Kat-ze", "Tep-pich", "Na-gel",
+      "Blu-me", "Ap-fel", "Ba-na-ne", "En-te", "Ba-na-ne", "Son-ne", "Ha-se", "Mes-ser", "Löf-fel", "Tel-ler",
+      "Vo-gel", "Fens-ter", "Pa-pier","Wol-ke", "Fla-sche", "Lam-pe", "Tas-se", "Na-se","Ba-by", "Pup-pe", "Was-ser",
+    ];
+
+    function getRandomEasyWord() {
+      return easyWords[Math.floor(Math.random() * easyWords.length)];
     }
 
-    function splitWordIntoPieces(word) {
-      const length = word.length;
-      const pieceCount = Math.floor(Math.random() * (4 - 2 + 1)) + 2;
-      const pieceLengths = Array(pieceCount).fill(Math.floor(length / pieceCount));
-      for (let i = 0; i < length % pieceCount; i++) {
-        pieceLengths[i]++;
-      }
-      const pieces = [];
-      let start = 0;
-      pieceLengths.forEach(len => {
-        pieces.push(word.slice(start, start + len));
-        start += len;
-      });
-      return shuffleArray(pieces);
+    function splitWordIntoSyllables(word) {
+      return word.includes("-") ? word.split("-") : [word];
     }
 
     function loadRandomTask() {
       puzzleContainer.innerHTML = "";
       dropZone.innerHTML = "Ziehe die Puzzlestücke hierher";
+      dropZone.classList.remove("highlight");
 
-      const randomWord = wordBank[Math.floor(Math.random() * wordBank.length)];
-      const pieces = splitWordIntoPieces(randomWord);
-      currentTask = { word: randomWord, pieces };
+      const randomWord = getRandomEasyWord();
+      const pieces = splitWordIntoSyllables(randomWord);
+      currentTask = { word: randomWord.replace(/-/g, ""), pieces };
 
       pieces.forEach((piece, index) => {
         const puzzlePiece = document.createElement("div");
         puzzlePiece.className = "puzzle-piece";
         puzzlePiece.textContent = piece;
         puzzlePiece.draggable = true;
-        puzzlePiece.id = `piece-${index}`;
+        puzzlePiece.dataset.order = index;
         puzzleContainer.appendChild(puzzlePiece);
 
         puzzlePiece.addEventListener("dragstart", (e) => {
-          e.dataTransfer.setData("text", e.target.id);
+          e.dataTransfer.setData("text", e.target.dataset.order);
         });
       });
     }
 
     dropZone.addEventListener("dragover", (e) => {
       e.preventDefault();
+      dropZone.classList.add("highlight");
+    });
+
+    dropZone.addEventListener("dragleave", () => {
+      dropZone.classList.remove("highlight");
     });
 
     dropZone.addEventListener("drop", (e) => {
       e.preventDefault();
-      const pieceId = e.dataTransfer.getData("text");
-      const piece = document.getElementById(pieceId);
+      dropZone.classList.remove("highlight");
+      const pieceOrder = e.dataTransfer.getData("text");
+      const piece = document.querySelector(`[data-order='${pieceOrder}']`);
       dropZone.appendChild(piece);
       checkCompletion();
     });
 
     function checkCompletion() {
-      const piecesInDropZone = Array.from(dropZone.children).length;
-      if (piecesInDropZone === currentTask.pieces.length) {
+      const piecesInDropZone = Array.from(dropZone.children).map(piece => piece.textContent).join("");
+      if (piecesInDropZone.length === currentTask.word.length) {
         checkCorrect();
       }
     }
 
     function checkCorrect() {
-      const piecesInDropZone = Array.from(dropZone.children)
-        .map((piece) => piece.textContent)
-        .join("");
+  const piecesInDropZone = Array.from(dropZone.children).filter(el => el.classList.contains("puzzle-piece"));
+  const piecesText = piecesInDropZone.map(piece => piece.textContent).join("");
 
-      if (piecesInDropZone === currentTask.word) {
-        correctMessage.style.display = "block";
-        setTimeout(() => {
-          correctMessage.style.display = "none";
-          loadRandomTask();
-        }, 2000);
-      } else {
-        incorrectMessage.style.display = "block";
-        setTimeout(() => {
-          incorrectMessage.style.display = "none";
-          dropZone.innerHTML = "Ziehe die Puzzlestücke hierher";
-          loadRandomTask();
-        }, 2000);
+  if (piecesText === currentTask.word) {
+    correctMessage.style.display = "block";
+    incorrectMessage.style.display = "none";
+
+    setTimeout(() => {
+      correctMessage.style.display = "none";
+      loadRandomTask();
+    }, 2000);
+  } else {
+    incorrectMessage.style.display = "block";
+    correctMessage.style.display = "none";
+
+    // Nach kurzer Zeit Puzzleteile zurücksetzen
+    setTimeout(() => {
+      incorrectMessage.style.display = "none";
+
+      // Puzzleteile in den Puzzle-Container zurücklegen
+      piecesInDropZone.forEach(piece => puzzleContainer.appendChild(piece));
+
+      // **Hier liegt der Trick:** Der ursprüngliche Text muss erhalten bleiben!
+      if (dropZone.children.length === 0 || piecesInDropZone.length > 0) {
+        dropZone.innerHTML = "Ziehe die Puzzlestücke hierher";
       }
-    }
-
+    }, 2000);
+  }
+}
     loadRandomTask();
   </script>
 </body>
 </html>
-
-
-
-
-
-
