@@ -142,6 +142,7 @@
         <div class="question" id="question"></div>
         <div class="answers" id="answers"></div>
     </div>
+
     <div class="footer">
         <a href="index.html" class="back-button">Zurück zur Startseite</a>
     </div>
@@ -245,9 +246,9 @@
                 showNotification("Richtig! 🎉", true);
                 updateProgress(true);
                 currentTask = null; // Neue Aufgabe generieren
-                setTimeout(loadTask, 3000);
+                setTimeout(loadTask, 5000);
             } else {
-                showNotification("Huch, das war nicht ganz richtig. Versuch es nochmal! ❌", false);
+                showNotification("Huch, das war nicht ganz richtig. Versuch es nochmal! ❌ Tipp: Zähle die Kästchen in Grün und Lila", false);
                 updateProgress(false);
             }
         }

@@ -99,6 +99,28 @@
 
     .nav-button.left { left: 10px; }
     .nav-button.right { right: 10px; }
+
+    .footer {
+      text-align: center;
+    }
+
+    .back-button {
+      margin-top: auto;
+      margin-bottom: 20px;
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #d4af37;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      text-decoration: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .back-button:hover {
+      background-color: #b68b2b;
+    }
   </style>
 </head>
 <body>
@@ -131,9 +153,9 @@
     <button class="nav-button right" onclick="nextTask()">➡</button>
   </main>
 
-  <footer>
+  <div class="footer">
     <a href="index.html" class="back-button">Zurück zur Startseite</a>
-  </footer>
+  </div>
 
   <script>
     let currentTask = 1;
@@ -153,28 +175,8 @@
       currentTask = currentTask === 1 ? 2 : 1;
       showTask(currentTask);
     }
-
-    function allowDrop(event) {
-      event.preventDefault();
-    }
-
-    function drag(event) {
-      event.dataTransfer.setData("text", event.target.id);
-    }
-
-    function drop(event) {
-      event.preventDefault();
-      const draggedElementId = event.dataTransfer.getData("text");
-      const draggedElement = document.getElementById(draggedElementId);
-      const dropzoneClass = event.target.classList[1];
-
-      if (draggedElement.classList.contains(dropzoneClass)) {
-        event.target.appendChild(draggedElement);
-      } else {
-        alert("Falsch! Bitte ziehe das Objekt zur passenden Farbe.");
-      }
-    }
   </script>
 </body>
 </html>
+
 
