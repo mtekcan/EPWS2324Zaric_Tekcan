@@ -17,11 +17,12 @@
 
         .container {
             margin: auto;
-            padding: 100px;
+            padding: 50px;
             max-width: 400px;
             background-color: white;
             border-radius: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         h1 {
@@ -101,11 +102,43 @@
         .back-button:hover {
             background-color: #b68b2b;
         }
+
+        /* Benachrichtigungsbox */
+        .notification {
+            display: none;
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+        }
+
+        .notification.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .notification.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .notification.show {
+            display: block;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Rechnen</h1>
+        <div class="notification" id="notification"></div> <!-- Nachricht oben eingefügt -->
         <div class="blocks" id="blocks"></div>
         <div class="question" id="question"></div>
         <div class="answers" id="answers"></div>
@@ -115,9 +148,7 @@
     </div>
 
     <script>
-        // Zufällig eine Aufgabe generieren
         function generateRandomTask() {
-            // Zufällige Zahlen zwischen 1 und 9
             const num1 = Math.floor(Math.random() * 9) + 1;
             const num2 = Math.floor(Math.random() * 9) + 1;
             
@@ -129,7 +160,6 @@
                 Math.floor(Math.random() * 18) + 1
             ];
 
-            // Die Antwortmöglichkeiten zufällig mischen
             const shuffledOptions = options.sort(() => Math.random() - 0.5);
 
             return {
@@ -141,9 +171,6 @@
             };
         }
 
-        let currentTask = 0;
-
-        // Fortschritt speichern
         function updateProgress(isCorrect) {
             let progress = JSON.parse(localStorage.getItem("progress")) || {
                 rechnen: { correct: 0, incorrect: 0 },
@@ -152,41 +179,34 @@
                 lesen: { correct: 0, incorrect: 0 }
             };
 
-            // Fortschritt aktualisieren
             if (isCorrect) {
                 progress.rechnen.correct++;
             } else {
                 progress.rechnen.incorrect++;
             }
 
-            // Fortschritt in LocalStorage speichern
             localStorage.setItem("progress", JSON.stringify(progress));
         }
 
-        // Aufgabe laden
         function loadTask() {
-            const task = generateRandomTask(); // Generiere eine zufällige Aufgabe
+            const task = generateRandomTask();
             document.getElementById("question").innerText = task.question;
 
-            // Blöcke anzeigen
             const blocksContainer = document.getElementById("blocks");
             blocksContainer.innerHTML = "";
             
-            // Die ersten num1 Blöcke mit lila
             for (let i = 0; i < task.num1; i++) {
                 const block = document.createElement("div");
                 block.className = "block purple";
                 blocksContainer.appendChild(block);
             }
 
-            // Die nächsten num2 Blöcke mit grün
             for (let i = 0; i < task.num2; i++) {
                 const block = document.createElement("div");
                 block.className = "block green";
                 blocksContainer.appendChild(block);
             }
 
-            // Die restlichen Blöcke mit grau
             const remainingBlocks = 20 - (task.num1 + task.num2);
             for (let i = 0; i < remainingBlocks; i++) {
                 const block = document.createElement("div");
@@ -194,7 +214,6 @@
                 blocksContainer.appendChild(block);
             }
 
-            // Antwortmöglichkeiten anzeigen
             const answersContainer = document.getElementById("answers");
             answersContainer.innerHTML = "";
             task.options.forEach(option => {
@@ -206,26 +225,30 @@
             });
         }
 
-        // Antwort überprüfen
-        function checkAnswer(answer, correct) {
-            if (answer === correct) {
-                alert("Richtig!");
-                updateProgress(true); // Fortschritt: richtig
-            } else {
-                alert("Falsch! Die richtige Antwort war " + correct);
-                updateProgress(false); // Fortschritt: falsch
-            }
-
-            // Nächste Aufgabe oder Ende
-            currentTask++;
-            loadTask();
+        function showNotification(message, isCorrect) {
+            const notification = document.getElementById("notification");
+            notification.innerText = message;
+            notification.className = `notification show ${isCorrect ? 'success' : 'error'}`;
+            
+            setTimeout(() => {
+                notification.classList.remove("show");
+            }, 3000); // Nachricht bleibt 3 Sekunden sichtbar
         }
 
-        // Erste Aufgabe laden
+        function checkAnswer(answer, correct) {
+            if (answer === correct) {
+                showNotification("Richtig! 🎉", true);
+                updateProgress(true);
+            } else {
+                showNotification("Huch, das war nicht ganz richtig. Versuch es nochmal! ❌", false);
+                updateProgress(false);
+            }
+
+            setTimeout(loadTask, 3500); // Neue Aufgabe nach 3,5 Sekunden
+        }
+
         loadTask();
     </script>
 </body>
 </html>
-
-
 
