@@ -103,7 +103,6 @@
             background-color: #b68b2b;
         }
 
-        /* Benachrichtigungsbox */
         .notification {
             display: none;
             position: absolute;
@@ -138,7 +137,7 @@
 <body>
     <div class="container">
         <h1>Rechnen</h1>
-        <div class="notification" id="notification"></div> <!-- Nachricht oben eingefügt -->
+        <div class="notification" id="notification"></div>
         <div class="blocks" id="blocks"></div>
         <div class="question" id="question"></div>
         <div class="answers" id="answers"></div>
@@ -148,6 +147,8 @@
     </div>
 
     <script>
+        let currentTask = null; // Speichert die aktuelle Aufgabe
+
         function generateRandomTask() {
             const num1 = Math.floor(Math.random() * 9) + 1;
             const num2 = Math.floor(Math.random() * 9) + 1;
@@ -189,25 +190,29 @@
         }
 
         function loadTask() {
-            const task = generateRandomTask();
-            document.getElementById("question").innerText = task.question;
+            // Falls die aktuelle Aufgabe falsch beantwortet wurde, wiederhole sie
+            if (!currentTask) {
+                currentTask = generateRandomTask(); // Neue Aufgabe nur, wenn keine vorhanden ist
+            }
+
+            document.getElementById("question").innerText = currentTask.question;
 
             const blocksContainer = document.getElementById("blocks");
             blocksContainer.innerHTML = "";
-            
-            for (let i = 0; i < task.num1; i++) {
+
+            for (let i = 0; i < currentTask.num1; i++) {
                 const block = document.createElement("div");
                 block.className = "block purple";
                 blocksContainer.appendChild(block);
             }
 
-            for (let i = 0; i < task.num2; i++) {
+            for (let i = 0; i < currentTask.num2; i++) {
                 const block = document.createElement("div");
                 block.className = "block green";
                 blocksContainer.appendChild(block);
             }
 
-            const remainingBlocks = 20 - (task.num1 + task.num2);
+            const remainingBlocks = 20 - (currentTask.num1 + currentTask.num2);
             for (let i = 0; i < remainingBlocks; i++) {
                 const block = document.createElement("div");
                 block.className = "block gray";
@@ -216,11 +221,11 @@
 
             const answersContainer = document.getElementById("answers");
             answersContainer.innerHTML = "";
-            task.options.forEach(option => {
+            currentTask.options.forEach(option => {
                 const answerButton = document.createElement("div");
                 answerButton.className = "answer";
                 answerButton.innerText = option;
-                answerButton.onclick = () => checkAnswer(option, task.correct);
+                answerButton.onclick = () => checkAnswer(option);
                 answersContainer.appendChild(answerButton);
             });
         }
@@ -232,23 +237,24 @@
             
             setTimeout(() => {
                 notification.classList.remove("show");
-            }, 3000); // Nachricht bleibt 3 Sekunden sichtbar
+            }, 3000);
         }
 
-        function checkAnswer(answer, correct) {
-            if (answer === correct) {
+        function checkAnswer(answer) {
+            if (answer === currentTask.correct) {
                 showNotification("Richtig! 🎉", true);
                 updateProgress(true);
+                currentTask = null; // Neue Aufgabe generieren
+                setTimeout(loadTask, 3000);
             } else {
                 showNotification("Huch, das war nicht ganz richtig. Versuch es nochmal! ❌", false);
                 updateProgress(false);
             }
-
-            setTimeout(loadTask, 3500); // Neue Aufgabe nach 3,5 Sekunden
         }
 
         loadTask();
     </script>
 </body>
 </html>
+
 
