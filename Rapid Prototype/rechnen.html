@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -18,10 +17,10 @@
 
         .container {
             margin: auto;
-            padding: 20px;
+            padding: 100px;
             max-width: 400px;
             background-color: white;
-            border-radius: 10px;
+            border-radius: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -32,20 +31,29 @@
 
         .blocks {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             margin-bottom: 20px;
+            max-width: 400px;
         }
 
         .block {
-            width: 40px;
-            height: 40px;
-            margin: 5px;
-            background-color: #6b5b95;
+            width: 30px;
+            height: 30px;
+            margin: 4px;
             border-radius: 5px;
         }
 
         .block.gray {
             background-color: #d3d3d3;
+        }
+
+        .block.purple {
+            background-color: #6b5b95;
+        }
+
+        .block.green {
+            background-color: #88b04b;
         }
 
         .question {
@@ -107,14 +115,31 @@
     </div>
 
     <script>
-        // Aufgabenliste
-        const tasks = [
-            { question: "5 + 2 =", correct: 7, options: [6, 7, 10, 4] },
-            { question: "3 + 4 =", correct: 7, options: [5, 7, 9, 6] },
-            { question: "6 + 3 =", correct: 9, options: [8, 9, 10, 7] },
-            { question: "2 + 5 =", correct: 7, options: [7, 8, 6, 5] },
-            { question: "1 + 1 =", correct: 2, options: [3, 1, 0, 2] }
-        ];
+        // Zufällig eine Aufgabe generieren
+        function generateRandomTask() {
+            // Zufällige Zahlen zwischen 1 und 9
+            const num1 = Math.floor(Math.random() * 9) + 1;
+            const num2 = Math.floor(Math.random() * 9) + 1;
+            
+            const correct = num1 + num2;
+            const options = [
+                correct, 
+                Math.floor(Math.random() * 18) + 1, 
+                Math.floor(Math.random() * 18) + 1, 
+                Math.floor(Math.random() * 18) + 1
+            ];
+
+            // Die Antwortmöglichkeiten zufällig mischen
+            const shuffledOptions = options.sort(() => Math.random() - 0.5);
+
+            return {
+                question: `${num1} + ${num2} =`,
+                correct,
+                num1,
+                num2,
+                options: shuffledOptions
+            };
+        }
 
         let currentTask = 0;
 
@@ -127,28 +152,45 @@
                 lesen: { correct: 0, incorrect: 0 }
             };
 
-            // Aktualisiere Fortschritt
+            // Fortschritt aktualisieren
             if (isCorrect) {
                 progress.rechnen.correct++;
             } else {
                 progress.rechnen.incorrect++;
             }
 
-            // Speichere Fortschritt in LocalStorage
+            // Fortschritt in LocalStorage speichern
             localStorage.setItem("progress", JSON.stringify(progress));
         }
 
         // Aufgabe laden
         function loadTask() {
-            const task = tasks[currentTask];
+            const task = generateRandomTask(); // Generiere eine zufällige Aufgabe
             document.getElementById("question").innerText = task.question;
 
             // Blöcke anzeigen
             const blocksContainer = document.getElementById("blocks");
             blocksContainer.innerHTML = "";
-            for (let i = 0; i < 10; i++) {
+            
+            // Die ersten num1 Blöcke mit lila
+            for (let i = 0; i < task.num1; i++) {
                 const block = document.createElement("div");
-                block.className = i < task.correct ? "block" : "block gray";
+                block.className = "block purple";
+                blocksContainer.appendChild(block);
+            }
+
+            // Die nächsten num2 Blöcke mit grün
+            for (let i = 0; i < task.num2; i++) {
+                const block = document.createElement("div");
+                block.className = "block green";
+                blocksContainer.appendChild(block);
+            }
+
+            // Die restlichen Blöcke mit grau
+            const remainingBlocks = 20 - (task.num1 + task.num2);
+            for (let i = 0; i < remainingBlocks; i++) {
+                const block = document.createElement("div");
+                block.className = "block gray";
                 blocksContainer.appendChild(block);
             }
 
@@ -159,30 +201,24 @@
                 const answerButton = document.createElement("div");
                 answerButton.className = "answer";
                 answerButton.innerText = option;
-                answerButton.onclick = () => checkAnswer(option);
+                answerButton.onclick = () => checkAnswer(option, task.correct);
                 answersContainer.appendChild(answerButton);
             });
         }
 
         // Antwort überprüfen
-        function checkAnswer(answer) {
-            const task = tasks[currentTask];
-            if (answer === task.correct) {
+        function checkAnswer(answer, correct) {
+            if (answer === correct) {
                 alert("Richtig!");
                 updateProgress(true); // Fortschritt: richtig
             } else {
-                alert("Falsch! Die richtige Antwort war " + task.correct);
+                alert("Falsch! Die richtige Antwort war " + correct);
                 updateProgress(false); // Fortschritt: falsch
             }
 
             // Nächste Aufgabe oder Ende
             currentTask++;
-            if (currentTask < tasks.length) {
-                loadTask();
-            } else {
-                alert("Du hast alle Aufgaben bearbeitet!");
-                window.location.href = "lernfortschritt.html"; // Zur Lernfortschritt-Seite weiterleiten
-            }
+            loadTask();
         }
 
         // Erste Aufgabe laden
@@ -190,3 +226,6 @@
     </script>
 </body>
 </html>
+
+
+
