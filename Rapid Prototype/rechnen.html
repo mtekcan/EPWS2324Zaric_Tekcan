@@ -238,12 +238,12 @@
             
             setTimeout(() => {
                 notification.classList.remove("show");
-            }, 3000);
+            }, 5000);
         }
 
         function checkAnswer(answer) {
             if (answer === currentTask.correct) {
-                showNotification("Richtig! 🎉", true);
+                showNotification("Richtig! 🎉 Nächste Aufgabe...", true);
                 updateProgress(true);
                 currentTask = null; // Neue Aufgabe generieren
                 setTimeout(loadTask, 5000);
@@ -252,6 +252,33 @@
                 updateProgress(false);
             }
         }
+        
+        function updateProgress(isCorrect) {
+    let today = new Date().toISOString().split('T')[0];
+    let progressData = JSON.parse(localStorage.getItem("progressData")) || {};
+
+    // Falls heute noch nicht existiert, erstelle einen neuen Eintrag
+    if (!progressData[today]) {
+        progressData[today] = {
+            rechnen: { correct: 0, incorrect: 0 },
+            farben: { correct: 0, incorrect: 0 },
+            bilder: { correct: 0, incorrect: 0 },
+            lesen: { correct: 0, incorrect: 0 }
+        };
+    }
+
+    // Aktualisiere den Fortschritt für die aktuelle Aufgabe (z. B. "rechnen")
+    if (isCorrect) {
+        progressData[today].rechnen.correct++;
+    } else {
+        progressData[today].rechnen.incorrect++;
+    }
+
+    // Speichere die aktualisierten Fortschrittsdaten
+    localStorage.setItem("progressData", JSON.stringify(progressData));
+}
+
+        
 
         loadTask();
     </script>

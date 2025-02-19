@@ -25,27 +25,13 @@
             font-size: 24px;
             color: #333;
             margin-bottom: 20px;
+            text-align: center;
         }
 
         .progress-item {
             display: flex;
             align-items: center;
             margin-bottom: 20px;
-        }
-
-        .progress-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .icon {
-            font-size: 24px;
-            margin-right: 15px;
-        }
-
-        .label {
-            width: 100px;
-            font-size: 16px;
-            color: #333;
         }
 
         .progress-bar {
@@ -58,57 +44,123 @@
             position: relative;
         }
 
-        .progress-bar .progress {
+        .progress {
             height: 100%;
             border-radius: 10px;
+            transition: width 0.5s, background-color 0.5s;
         }
 
-        .progress-bar .progress-red {
-            background: #f44336;
+        .progress-red { background: #f44336; }
+        .progress-orange { background: #ff9800; }
+        .progress-yellow { background: #ffeb3b; }
+        .progress-green { background: #4caf50; }
+
+        .date-selector {
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        .progress-bar .progress-green {
+        .button {
+            padding: 5px 10px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
             background: #4caf50;
+            color: white;
+            border-radius: 5px;
         }
 
-        .percentage {
+        .back-button {
+            display: block;
+            text-align: center;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #d4af37;
+            border-radius: 5px;
+            color: white;
             font-size: 16px;
-            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+            width: fit-content;
         }
 
-        .check-icon {
-            font-size: 20px;
-            color: #4caf50;
+        .back-button:hover {
+            background-color: #b68b2b;
         }
     </style>
-    
     <script>
         function loadProgress() {
-            // Hole Fortschritt aus LocalStorage
-            let progress = JSON.parse(localStorage.getItem("progress")) || {
-                rechnen: { correct: 0, incorrect: 0 },
-                farben: { correct: 0, incorrect: 0 },
-                bilder: { correct: 0, incorrect: 0 },
-                lesen: { correct: 0, incorrect: 0 }
-            };
+    let today = new Date().toISOString().split('T')[0];
+    let progressData = JSON.parse(localStorage.getItem("progressData")) || {};
 
-            // Funktion zur Berechnung des Prozentsatzes
-            function calculatePercentage(correct, incorrect) {
-                let total = correct + incorrect;
-                return total === 0 ? 0 : Math.round((correct / total) * 100);
+    console.log("Geladene Daten in lernfortschritt.html:", progressData);
+
+    // Entferne alte Daten, wenn mehr als 4 Tage gespeichert sind
+    let dates = Object.keys(progressData).sort().slice(-4);
+    let newProgressData = {};
+    dates.forEach(date => newProgressData[date] = progressData[date]);
+    localStorage.setItem("progressData", JSON.stringify(newProgressData));
+
+    // Falls heute noch nicht existiert, neuen Eintrag erstellen
+    if (!newProgressData[today]) {
+        newProgressData[today] = {
+            rechnen: { correct: 0, incorrect: 0 },
+            farben: { correct: 0, incorrect: 0 },
+            bilder: { correct: 0, incorrect: 0 },
+            lesen: { correct: 0, incorrect: 0 }
+        };
+        localStorage.setItem("progressData", JSON.stringify(newProgressData));
+    }
+
+    updateUI(today);
+}
+
+
+function updateUI(date) {
+    let today = new Date().toISOString().split('T')[0];
+    let progressData = JSON.parse(localStorage.getItem("progressData")) || {};
+    let progress = progressData[date] || { rechnen: { correct: 0, incorrect: 0 }, farben: { correct: 0, incorrect: 0 }, bilder: { correct: 0, incorrect: 0 }, lesen: { correct: 0, incorrect: 0 } };
+    
+    console.log("updateUI aufgerufen für Datum:", date);
+    console.log("Daten für das Datum:", progress);
+
+    function calculatePercentage(correct, incorrect) {
+        let total = correct + incorrect;
+        return total === 0 ? 0 : Math.round((correct / total) * 100);
+    }
+
+    function updateProgressItem(id, correct, incorrect) {
+        console.log(`Update für ${id}: ${correct} richtig, ${incorrect} falsch`);
+        const percentage = calculatePercentage(correct, incorrect);
+        const progressBar = document.getElementById(`${id}-progress`);
+        if (!progressBar) {
+            console.error("Fehlendes Element:", `${id}-progress`);
+            return;
+        }
+        progressBar.style.width = percentage + "%";
+        progressBar.className = "progress";
+        progressBar.classList.add(percentage < 25 ? "progress-red" : percentage < 50 ? "progress-orange" : percentage < 75 ? "progress-yellow" : "progress-green");
+        document.getElementById(`${id}-percentage`).innerText = percentage + "%";
+    }
+
+    updateProgressItem("rechnen", progress.rechnen.correct, progress.rechnen.incorrect);
+    updateProgressItem("farben", progress.farben.correct, progress.farben.incorrect);
+    updateProgressItem("bilder", progress.bilder.correct, progress.bilder.incorrect);
+    updateProgressItem("lesen", progress.lesen.correct, progress.lesen.incorrect);
+
+    document.getElementById("current-date").innerText = date;
+
+    let nextButton = document.getElementById("next-button");
+    nextButton.style.display = (date === today) ? "none" : "inline-block";
+}
+
+
+        function changeDate(days) {
+            let dates = Object.keys(JSON.parse(localStorage.getItem("progressData")) || {}).sort();
+            let currentIndex = dates.indexOf(document.getElementById("current-date").innerText);
+            if (currentIndex + days >= 0 && currentIndex + days < dates.length) {
+                updateUI(dates[currentIndex + days]);
             }
-
-            // Aktualisiere Fortschrittsbalken und Prozentsätze
-            const updateProgressItem = (id, correct, incorrect) => {
-                const percentage = calculatePercentage(correct, incorrect);
-                document.getElementById(`${id}-progress`).style.width = percentage + "%";
-                document.getElementById(`${id}-percentage`).innerText = percentage + "%";
-            };
-
-            updateProgressItem("rechnen", progress.rechnen.correct, progress.rechnen.incorrect);
-            updateProgressItem("farben", progress.farben.correct, progress.farben.incorrect);
-            updateProgressItem("bilder", progress.bilder.correct, progress.bilder.incorrect);
-            updateProgressItem("lesen", progress.lesen.correct, progress.lesen.incorrect);
         }
 
         window.onload = loadProgress;
@@ -117,45 +169,39 @@
 <body>
     <div class="container">
         <h1>Lernfortschritt</h1>
+        <div class="date-selector">
+            <button class="button" onclick="changeDate(-1)">&#8592; Vorheriger Tag</button>
+            <span id="current-date"></span>
+            <button class="button" id="next-button" onclick="changeDate(1)">Nächster Tag &#8594;</button>
+        </div>
 
         <div class="progress-item">
-            <div class="icon">📟</div>
-            <div class="label"><a href="rechnen.html" class="progress-link">Rechnen</a></div>
-            <div class="progress-bar">
-                <div id="rechnen-progress" class="progress progress-red" style="width: 0%;"></div>
-            </div>
+            <div class="label">Rechnen</div>
+            <div class="progress-bar"><div id="rechnen-progress" class="progress"></div></div>
             <div id="rechnen-percentage" class="percentage">0%</div>
         </div>
 
         <div class="progress-item">
-            <div class="icon">🎨</div>
-            <div class="label"><a href="farben.html" class="progress-link">Farben</a></div>
-            <div class="progress-bar">
-                <div id="farben-progress" class="progress progress-red" style="width: 0%;"></div>
-            </div>
+            <div class="label">Farben</div>
+            <div class="progress-bar"><div id="farben-progress" class="progress"></div></div>
             <div id="farben-percentage" class="percentage">0%</div>
         </div>
 
         <div class="progress-item">
-            <div class="icon">🖼️</div>
-            <div class="label"><a href="bilder.html" class="progress-link">Bilder</a></div>
-            <div class="progress-bar">
-                <div id="bilder-progress" class="progress progress-red" style="width: 0%;"></div>
-            </div>
+            <div class="label">Bilder</div>
+            <div class="progress-bar"><div id="bilder-progress" class="progress"></div></div>
             <div id="bilder-percentage" class="percentage">0%</div>
         </div>
 
         <div class="progress-item">
-            <div class="icon">📖</div>
-            <div class="label"><a href="lesen.html" class="progress-link">Lesen</a></div>
-            <div class="progress-bar">
-                <div id="lesen-progress" class="progress progress-red" style="width: 0%;"></div>
-            </div>
+            <div class="label">Lesen</div>
+            <div class="progress-bar"><div id="lesen-progress" class="progress"></div></div>
             <div id="lesen-percentage" class="percentage">0%</div>
         </div>
     </div>
-    <footer>
-        <a href="index.html" class="back-button">Zurück zur Startseite</a>
-      </footer>
 </body>
+<footer>
+    <a href="index.html" class="back-button">Zurück zur Startseite</a>
+</footer>
 </html>
+

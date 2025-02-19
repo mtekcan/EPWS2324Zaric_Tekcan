@@ -138,28 +138,57 @@
         const img = document.createElement("img");
         img.src = image.url;
         img.alt = image.name;
-        img.onclick = () => checkAnswer(image.name);
+        img.onclick = function() {
+    console.log("Bild wurde geklickt:", image.name); 
+    checkAnswer(image.name);
+};
+
         imagesContainer.appendChild(img);
       });
     }
 
     function checkAnswer(selectedImage) {
-      const task = tasks[currentTaskIndex];
-      if (selectedImage === task.correct) {
-        alert("Richtig!");
-        let progress = JSON.parse(localStorage.getItem("progress")) || { bilder: { correct: 0, incorrect: 0 } };
-        progress.bilder.correct++;
-        localStorage.setItem('progress', JSON.stringify(progress));
-      } else {
-        alert("Falsch! Lies dir die Aufgabenstellung nochmal durch.");
-        let progress = JSON.parse(localStorage.getItem("progress")) || { bilder: { correct: 0, incorrect: 0 } };
-        progress.bilder.incorrect++;
-        localStorage.setItem('progress', JSON.stringify(progress));
-      }
-      currentTaskIndex = (parseInt(currentTaskIndex) + 1) % tasks.length;
-      localStorage.setItem('currentTaskIndex', currentTaskIndex);
-      loadTask();
+    console.log("checkAnswer wurde aufgerufen mit:", selectedImage);
+    const task = tasks[currentTaskIndex];
+    let today = new Date().toISOString().split('T')[0];
+
+    let progressData = JSON.parse(localStorage.getItem("progressData")) || {};
+
+    console.log("Vorher:", JSON.stringify(progressData, null, 2));
+
+    // Falls progressData für heute nicht existiert, erstelle es
+    if (!progressData[today]) {
+        progressData[today] = {
+            rechnen: { correct: 0, incorrect: 0 },
+            farben: { correct: 0, incorrect: 0 },
+            bilder: { correct: 0, incorrect: 0 },
+            lesen: { correct: 0, incorrect: 0 }
+        };
     }
+
+    // Stelle sicher, dass correct und incorrect Zahlen sind
+    progressData[today].bilder.correct = parseInt(progressData[today].bilder.correct) || 0;
+    progressData[today].bilder.incorrect = parseInt(progressData[today].bilder.incorrect) || 0;
+
+    if (selectedImage === task.correct) {
+        alert("Richtig!");
+        progressData[today].bilder.correct += 1;
+    } else {
+        alert("Falsch!");
+        progressData[today].bilder.incorrect += 1;
+    }
+
+    console.log("Nachher:", JSON.stringify(progressData, null, 2));
+
+    localStorage.setItem("progressData", JSON.stringify(progressData));
+
+    currentTaskIndex = (parseInt(currentTaskIndex) + 1) % tasks.length;
+    localStorage.setItem('currentTaskIndex', currentTaskIndex);
+    loadTask();
+}
+
+
+
 
     loadTask();
   </script>

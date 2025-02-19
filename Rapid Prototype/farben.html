@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Farben Drag & Drop</title>
+  <title>Drag & Drop Übungen</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -51,12 +51,35 @@
       font-size: 18px;
       font-weight: bold;
       color: white;
+      transition: background-color 0.3s, transform 0.3s;
     }
 
     .red { background-color: #e74c3c; }
     .blue { background-color: #3498db; }
     .green { background-color: #2ecc71; }
     .yellow { background-color: #f1c40f; }
+
+     /* Angepasste Farben für Übung 2 */
+     .apple { background-color: #27ae60; } /* Apfelgrün */
+    .banana { background-color: #f39c12; } /* Bananengelb */
+    .grape { background-color: #9b59b6; } /* Traubenlila */
+    .orange { background-color: #e67e22; } /* Orangeton */
+    
+    /* Wackeln Animation */
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      50% { transform: translateX(10px); }
+      75% { transform: translateX(-10px); }
+      100% { transform: translateX(0); }
+    }
+
+    /* Wachsen/Schrumpfen Animation */
+    @keyframes growShrink {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
 
     .circle-container {
       display: flex;
@@ -79,34 +102,21 @@
       border-radius: 50%;
     }
 
-    .item.red { background-color: #e74c3c; }
-    .item.blue { background-color: #3498db; }
-    .item.green { background-color: #2ecc71; }
-    .item.yellow { background-color: #f1c40f; }
-
     .hidden { display: none; }
-
-    .nav-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 24px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #007bff;
+    .feedback {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 10px;
+      height: 30px;
     }
-
-    .nav-button.left { left: 10px; }
-    .nav-button.right { right: 10px; }
 
     .footer {
       text-align: center;
+      margin-top: auto;
+      padding: 20px;
     }
 
     .back-button {
-      margin-top: auto;
-      margin-bottom: 20px;
       display: inline-block;
       padding: 10px 20px;
       background-color: #d4af37;
@@ -115,68 +125,104 @@
       font-size: 16px;
       text-decoration: none;
       cursor: pointer;
-      position: relative;
     }
 
     .back-button:hover {
       background-color: #b68b2b;
     }
+
   </style>
 </head>
 <body>
   <main>
-    <h1>Farben</h1>
+    <h1 id="exercise-title">Farben</h1>
     <p class="instruction" id="task">Ziehe die Kreise zur richtigen Farbe</p>
+    <p class="feedback" id="feedback"></p>
 
-    <div class="container">
-      <div class="dropzone red" ondrop="drop(event)" ondragover="allowDrop(event)">Rot</div>
-      <div class="dropzone blue" ondrop="drop(event)" ondragover="allowDrop(event)">Blau</div>
-      <div class="dropzone green" ondrop="drop(event)" ondragover="allowDrop(event)">Grün</div>
-      <div class="dropzone yellow" ondrop="drop(event)" ondragover="allowDrop(event)">Gelb</div>
+    <div id="exercise1">
+      <div class="container">
+        <div class="dropzone red" ondrop="drop(event, 'red')" ondragover="allowDrop(event)" id="dropzone-red">Rot</div>
+        <div class="dropzone blue" ondrop="drop(event, 'blue')" ondragover="allowDrop(event)" id="dropzone-blue">Blau</div>
+        <div class="dropzone green" ondrop="drop(event, 'green')" ondragover="allowDrop(event)" id="dropzone-green">Grün</div>
+        <div class="dropzone yellow" ondrop="drop(event, 'yellow')" ondragover="allowDrop(event)" id="dropzone-yellow">Gelb</div>
+      </div>
+      <div class="circle-container">
+        <div class="item red" draggable="true" ondragstart="drag(event)" id="red1"></div>
+        <div class="item yellow" draggable="true" ondragstart="drag(event)" id="yellow1"></div>
+        <div class="item blue" draggable="true" ondragstart="drag(event)" id="blue1"></div>
+        <div class="item green" draggable="true" ondragstart="drag(event)" id="green1"></div>
+      </div>
     </div>
 
-    <div class="circle-container" id="task1">
-      <div class="item red" draggable="true" ondragstart="drag(event)" id="red1"></div>
-      <div class="item yellow" draggable="true" ondragstart="drag(event)" id="yellow1"></div>
-      <div class="item blue" draggable="true" ondragstart="drag(event)" id="blue1"></div>
-      <div class="item green" draggable="true" ondragstart="drag(event)" id="green1"></div>
+    <div id="exercise2" class="hidden">
+      <div class="container">
+        <div class="dropzone apple" ondrop="drop(event, 'apple')" ondragover="allowDrop(event)">Grün</div>
+        <div class="dropzone banana" ondrop="drop(event, 'banana')" ondragover="allowDrop(event)">Gelb</div>
+        <div class="dropzone grape" ondrop="drop(event, 'grape')" ondragover="allowDrop(event)">Lila</div>
+        <div class="dropzone orange" ondrop="drop(event, 'orange')" ondragover="allowDrop(event)">Orange</div>
+      </div>
+      <div class="circle-container">
+        <div class="item apple" draggable="true" ondragstart="drag(event)" id="apple">🍏</div>
+        <div class="item banana" draggable="true" ondragstart="drag(event)" id="banana">🍌</div>
+        <div class="item grape" draggable="true" ondragstart="drag(event)" id="grape">🍇</div>
+        <div class="item orange" draggable="true" ondragstart="drag(event)" id="orange">🍊</div>
+      </div>
     </div>
-
-    <div class="circle-container hidden" id="task2">
-      <div class="item red" draggable="true" ondragstart="drag(event)" id="apple">🍎</div>
-      <div class="item yellow" draggable="true" ondragstart="drag(event)" id="banana">🍌</div>
-      <div class="item blue" draggable="true" ondragstart="drag(event)" id="blueberry">🫐</div>
-      <div class="item green" draggable="true" ondragstart="drag(event)" id="pear">🍐</div>
-    </div>
-
-    <button class="nav-button left" onclick="prevTask()">⬅</button>
-    <button class="nav-button right" onclick="nextTask()">➡</button>
   </main>
-
   <div class="footer">
     <a href="index.html" class="back-button">Zurück zur Startseite</a>
   </div>
 
   <script>
-    let currentTask = 1;
-    function showTask(taskNumber) {
-      document.getElementById("task1").classList.add("hidden");
-      document.getElementById("task2").classList.add("hidden");
-      document.getElementById("task").innerText = taskNumber === 1 ? "Ziehe die Kreise zur richtigen Farbe" : "Ziehe die Obstsorten zur richtigen Farbe";
-      document.getElementById(`task${taskNumber}`).classList.remove("hidden");
+    let correctDrops = 0;
+
+    function allowDrop(event) {
+      event.preventDefault();
     }
 
-    function nextTask() {
-      currentTask = currentTask === 1 ? 2 : 1;
-      showTask(currentTask);
+    function drag(event) {
+      event.dataTransfer.setData("text", event.target.id);
     }
 
-    function prevTask() {
-      currentTask = currentTask === 1 ? 2 : 1;
-      showTask(currentTask);
+    function drop(event, targetId) {
+      event.preventDefault();
+      let data = event.dataTransfer.getData("text");
+      let draggedElement = document.getElementById(data);
+      let feedback = document.getElementById("feedback");
+      let dropzone = event.target;
+
+      if (data.includes(targetId)) {
+        // Richtige Antwort
+        event.target.appendChild(draggedElement);
+        feedback.textContent = "Super gemacht!";
+        feedback.style.color = "green";
+        dropzone.style.animation = "growShrink 0.5s ease"; // Wachsen/Schrumpfen bei richtiger Antwort
+        correctDrops++;
+
+        if (correctDrops === 4) {
+          setTimeout(() => toggleExercise(), 1000);
+        }
+      } else {
+        // Falsche Antwort
+        feedback.textContent = "Versuche es nochmal!";
+        feedback.style.color = "red";
+        dropzone.style.animation = "shake 0.5s ease"; // Wackeln bei falscher Antwort
+        setTimeout(() => {
+          draggedElement.parentElement.appendChild(draggedElement);
+;
+        }, 500);
+      }
+
+      // Nach der Animation zurücksetzen
+      setTimeout(() => {
+        dropzone.style.animation = "none";
+      }, 500);
+    }
+
+    function toggleExercise() {
+      document.getElementById("exercise1").classList.toggle("hidden");
+      document.getElementById("exercise2").classList.toggle("hidden");
     }
   </script>
 </body>
 </html>
-
-
