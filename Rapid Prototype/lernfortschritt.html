@@ -90,70 +90,61 @@
     </style>
     <script>
         function loadProgress() {
-    let today = new Date().toISOString().split('T')[0];
-    let progressData = JSON.parse(localStorage.getItem("progressData")) || {};
+            let today = new Date().toISOString().split('T')[0];
+            let progressData = JSON.parse(localStorage.getItem("progressData")) || {};
 
-    console.log("Geladene Daten in lernfortschritt.html:", progressData);
+            console.log("Geladene Daten in lernfortschritt.html:", progressData);
 
-    // Entferne alte Daten, wenn mehr als 4 Tage gespeichert sind
-    let dates = Object.keys(progressData).sort().slice(-4);
-    let newProgressData = {};
-    dates.forEach(date => newProgressData[date] = progressData[date]);
-    localStorage.setItem("progressData", JSON.stringify(newProgressData));
+            // Entferne alte Daten, wenn mehr als 4 Tage gespeichert sind
+            let dates = Object.keys(progressData).sort().slice(-4);
+            let newProgressData = {};
+            dates.forEach(date => newProgressData[date] = progressData[date]);
+            localStorage.setItem("progressData", JSON.stringify(newProgressData));
 
-    // Falls heute noch nicht existiert, neuen Eintrag erstellen
-    if (!newProgressData[today]) {
-        newProgressData[today] = {
-            rechnen: { correct: 0, incorrect: 0 },
-            farben: { correct: 0, incorrect: 0 },
-            bilder: { correct: 0, incorrect: 0 },
-            lesen: { correct: 0, incorrect: 0 }
-        };
-        localStorage.setItem("progressData", JSON.stringify(newProgressData));
-    }
+            // Falls heute noch nicht existiert, neuen Eintrag erstellen
+            if (!newProgressData[today]) {
+                newProgressData[today] = {
+                    rechnen: { correct: 0, incorrect: 0 },
+                    farben: { correct: 0, incorrect: 0 },
+                    bilder: { correct: 0, incorrect: 0 },
+                    lesen: { correct: 0, incorrect: 0 }
+                };
+                localStorage.setItem("progressData", JSON.stringify(newProgressData));
+            }
 
-    updateUI(today);
-}
-
-
-function updateUI(date) {
-    let today = new Date().toISOString().split('T')[0];
-    let progressData = JSON.parse(localStorage.getItem("progressData")) || {};
-    let progress = progressData[date] || { rechnen: { correct: 0, incorrect: 0 }, farben: { correct: 0, incorrect: 0 }, bilder: { correct: 0, incorrect: 0 }, lesen: { correct: 0, incorrect: 0 } };
-    
-    console.log("updateUI aufgerufen für Datum:", date);
-    console.log("Daten für das Datum:", progress);
-
-    function calculatePercentage(correct, incorrect) {
-        let total = correct + incorrect;
-        return total === 0 ? 0 : Math.round((correct / total) * 100);
-    }
-
-    function updateProgressItem(id, correct, incorrect) {
-        console.log(`Update für ${id}: ${correct} richtig, ${incorrect} falsch`);
-        const percentage = calculatePercentage(correct, incorrect);
-        const progressBar = document.getElementById(`${id}-progress`);
-        if (!progressBar) {
-            console.error("Fehlendes Element:", `${id}-progress`);
-            return;
+            updateUI(today);
         }
-        progressBar.style.width = percentage + "%";
-        progressBar.className = "progress";
-        progressBar.classList.add(percentage < 25 ? "progress-red" : percentage < 50 ? "progress-orange" : percentage < 75 ? "progress-yellow" : "progress-green");
-        document.getElementById(`${id}-percentage`).innerText = percentage + "%";
-    }
 
-    updateProgressItem("rechnen", progress.rechnen.correct, progress.rechnen.incorrect);
-    updateProgressItem("farben", progress.farben.correct, progress.farben.incorrect);
-    updateProgressItem("bilder", progress.bilder.correct, progress.bilder.incorrect);
-    updateProgressItem("lesen", progress.lesen.correct, progress.lesen.incorrect);
+        function updateUI(date) {
+            let progressData = JSON.parse(localStorage.getItem("progressData")) || {};
+            let progress = progressData[date] || { 
+                rechnen: { correct: 0, incorrect: 0 }, 
+                farben: { correct: 0, incorrect: 0 }, 
+                bilder: { correct: 0, incorrect: 0 }, 
+                lesen: { correct: 0, incorrect: 0 }
+            };
 
-    document.getElementById("current-date").innerText = date;
+            function calculatePercentage(correct, incorrect) {
+                let total = correct + incorrect;
+                return total === 0 ? 0 : Math.round((correct / total) * 100);
+            }
 
-    let nextButton = document.getElementById("next-button");
-    nextButton.style.display = (date === today) ? "none" : "inline-block";
-}
+            function updateProgressItem(id, correct, incorrect) {
+                const percentage = calculatePercentage(correct, incorrect);
+                const progressBar = document.getElementById(`${id}-progress`);
+                progressBar.style.width = percentage + "%";
+                progressBar.className = "progress";
+                progressBar.classList.add(percentage < 25 ? "progress-red" : percentage < 50 ? "progress-orange" : percentage < 75 ? "progress-yellow" : "progress-green");
+                document.getElementById(`${id}-percentage`).innerText = percentage + "%";
+            }
 
+            updateProgressItem("rechnen", progress.rechnen.correct, progress.rechnen.incorrect);
+            updateProgressItem("farben", progress.farben.correct, progress.farben.incorrect);
+            updateProgressItem("bilder", progress.bilder.correct, progress.bilder.incorrect);
+            updateProgressItem("lesen", progress.lesen.correct, progress.lesen.incorrect);
+
+            document.getElementById("current-date").innerText = date;
+        }
 
         function changeDate(days) {
             let dates = Object.keys(JSON.parse(localStorage.getItem("progressData")) || {}).sort();

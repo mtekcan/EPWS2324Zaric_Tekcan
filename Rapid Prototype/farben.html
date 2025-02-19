@@ -59,8 +59,8 @@
     .green { background-color: #2ecc71; }
     .yellow { background-color: #f1c40f; }
 
-     /* Angepasste Farben für Übung 2 */
-     .apple { background-color: #27ae60; } /* Apfelgrün */
+    /* Angepasste Farben für Übung 2 */
+    .apple { background-color: #27ae60; } /* Apfelgrün */
     .banana { background-color: #f39c12; } /* Bananengelb */
     .grape { background-color: #9b59b6; } /* Traubenlila */
     .orange { background-color: #e67e22; } /* Orangeton */
@@ -90,12 +90,12 @@
     }
 
     .item {
-      width: 50px;
-      height: 50px;
+      width: 80px;
+      height: 80px;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 18px;
+      font-size: 30px;
       font-weight: bold;
       color: white;
       cursor: grab;
@@ -175,6 +175,14 @@
 
   <script>
     let correctDrops = 0;
+    let totalCompletedExercises = parseInt(localStorage.getItem("completedExercises")) || 0;
+    
+    // Fortschritt anzeigen (optional)
+    window.onload = function() {
+      if (totalCompletedExercises > 0) {
+        document.getElementById("feedback").textContent = `Du hast bereits ${totalCompletedExercises} Übungen abgeschlossen!`;
+      }
+    }
 
     function allowDrop(event) {
       event.preventDefault();
@@ -200,7 +208,13 @@
         correctDrops++;
 
         if (correctDrops === 4) {
-          setTimeout(() => toggleExercise(), 1000);
+          totalCompletedExercises++; // Fortschritt erhöhen
+          localStorage.setItem("completedExercises", totalCompletedExercises); // Speichern
+
+          setTimeout(() => {
+            correctDrops = 0; // Zähler zurücksetzen
+            toggleExercise();
+          }, 1000);
         }
       } else {
         // Falsche Antwort
@@ -209,7 +223,6 @@
         dropzone.style.animation = "shake 0.5s ease"; // Wackeln bei falscher Antwort
         setTimeout(() => {
           draggedElement.parentElement.appendChild(draggedElement);
-;
         }, 500);
       }
 
@@ -222,7 +235,49 @@
     function toggleExercise() {
       document.getElementById("exercise1").classList.toggle("hidden");
       document.getElementById("exercise2").classList.toggle("hidden");
+      resetCircles();
+      correctDrops = 0; // Sicherstellen, dass die Zählung zurückgesetzt wird
     }
+
+    function resetCircles() {
+      const circleContainer1 = document.querySelector("#exercise1 .circle-container");
+      const circleContainer2 = document.querySelector("#exercise2 .circle-container");
+
+      // Zurücksetzen der Kreise für Übung 1
+      const circles1 = [
+        { id: "red1", className: "item red" },
+        { id: "yellow1", className: "item yellow" },
+        { id: "blue1", className: "item blue" },
+        { id: "green1", className: "item green" }
+      ];
+
+      circles1.forEach(circle => {
+        let element = document.getElementById(circle.id);
+        if (element) {
+          element.className = circle.className;
+          circleContainer1.appendChild(element);
+        }
+      });
+
+      // Zurücksetzen der Kreise für Übung 2
+      const circles2 = [
+        { id: "apple", className: "item apple" },
+        { id: "banana", className: "item banana" },
+        { id: "grape", className: "item grape" },
+        { id: "orange", className: "item orange" }
+      ];
+
+      circles2.forEach(circle => {
+        let element = document.getElementById(circle.id);
+        if (element) {
+          element.className = circle.className;
+          circleContainer2.appendChild(element);
+        }
+      });
+
+      document.getElementById("feedback").textContent = ""; // Feedback-Text zurücksetzen
+    }
+
   </script>
 </body>
 </html>

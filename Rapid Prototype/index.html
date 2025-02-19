@@ -10,7 +10,7 @@
     .lernfortschritt-container {
       display: flex;
       justify-content: center;
-      margin-top: 50px; /* Abstand nach unten */
+      margin-top: 50px;
     }
 
     .lernfortschritt-container a {
@@ -28,6 +28,110 @@
     .lernfortschritt-container a:hover {
       background-color: #45a049;
     }
+
+    /* Buttons Container unterhalb des Smileys */
+    .buttons-container-wrapper {
+      background-color: white; /* Weißer Hintergrund */
+      padding: 30px; /* Mehr Abstand um die Buttons */
+      border-radius: 10px; /* Abgerundete Ecken */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
+      margin-top: 50px; /* Abstand nach oben */
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      box-sizing: border-box; /* Sorgt dafür, dass Padding nicht die Gesamtbreite beeinflusst */
+    }
+
+    .buttons-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 700px; /* Maximale Breite der Buttons */
+      gap: 20px; /* Abstand zwischen den Buttons */
+    }
+
+    .button-link a {
+      display: block;
+      padding: 15px 30px; /* Größere Schaltflächen für bessere Benutzererfahrung */
+      background-color: #4caf50;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      border-radius: 8px;
+      text-align: center;
+      transition: background-color 0.3s ease;
+      position: relative; /* Positionierung für das Symbol */
+    }
+
+    .button-link a:hover {
+      background-color: #45a049;
+    }
+
+    /* Stil für das Taschenrechner-Symbol */
+    .calculator-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px; /* Größe des Symbols */
+    }
+
+    /* Button für "Rechnen" schöner gestalten */
+    .button-link.rechnen a {
+      background-color: #add8e6; /* Hellblau für Rechnen */
+      color: black; /* Schwarze Schriftfarbe */
+      padding-left: 40px; /* Platz für das Symbol */
+    }
+
+    .button-link.rechnen a:hover {
+      background-color: #87ceeb; /* Dunkleres Blau beim Hover */
+      color: black; /* Schrift bleibt schwarz beim Hover */
+    }
+
+    /* Button für "Farben" schöner gestalten */
+    .button-link.farben a {
+      background-color: #add8e6; /* Hellblau für Farben */
+      color: black; /* Schwarze Schriftfarbe */
+      padding-left: 35px; /* Padding anpassen, um die gleiche Breite wie die anderen zu haben */
+    }
+
+    .button-link.farben a:hover {
+      background-color: #87ceeb; /* Dunkleres Blau beim Hover */
+      color: black; /* Schrift bleibt schwarz beim Hover */
+    }
+
+    /* Button für "Lesen" schöner gestalten */
+    .button-link.lesen a {
+      background-color: #add8e6; /* Hellblau für Lesen */
+      color: black; /* Schwarze Schriftfarbe */
+      padding-left: 40px; /* Platz für das Symbol */
+    }
+
+    .button-link.lesen a:hover {
+      background-color: #87ceeb; /* Dunkleres Blau beim Hover */
+      color: black; /* Schrift bleibt schwarz beim Hover */
+    }
+
+    /* Button für "Bilder" schöner gestalten */
+    .button-link.bilder a {
+      background-color: #add8e6; /* Hellblau für Bilder */
+      color: black; /* Schwarze Schriftfarbe */
+      padding-left: 40px; /* Platz für das Symbol */
+    }
+
+    .button-link.bilder a:hover {
+      background-color: #87ceeb; /* Dunkleres Blau beim Hover */
+      color: black; /* Schrift bleibt schwarz beim Hover */
+    }
+
+    /* Stil für das Taschenrechner-, Farben-, Buch- und Bilder-Emoji */
+    .calculator-icon, .palette-icon, .book-icon, .image-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px; /* Größe der Symbole */
+    }
   </style>
 </head>
 <body>
@@ -36,27 +140,28 @@
       <h1>Hallo! Viel Spaß beim Lernen.</h1>
     </header>
     <main>
-      <div class="smiley-container">
-        <div class="smiley">
-          <div class="face"></div>
-          <div class="eyes">
-            <div class="eye"></div>
-            <div class="eye"></div>
-          </div>
-          <div class="mouth"></div>
-        </div>
+      <!-- Neuer Wrapper für den Bereich mit weißem Hintergrund -->
+      <div class="buttons-container-wrapper">
         <div class="buttons-container">
           <div class="button-link rechnen">
-            <a href="rechnen.html">Rechnen</a>
+            <a href="rechnen.html">
+              <span class="calculator-icon">🧮</span> Rechnen
+            </a>
           </div>
           <div class="button-link farben">
-            <a href="farben.html">Farben</a>
+            <a href="farben.html">
+              <span class="palette-icon">🌈</span> Farben
+            </a>
           </div>
           <div class="button-link lesen">
-            <a href="lesen.html">Lesen</a>
+            <a href="lesen.html">
+              <span class="book-icon">📚</span> Lesen
+            </a>
           </div>
           <div class="button-link bilder">
-            <a href="bilder.html">Bilder</a>
+            <a href="bilder.html">
+              <span class="image-icon">🖼️</span> Bilder
+            </a>
           </div>
         </div>
       </div>
@@ -68,3 +173,4 @@
   </div>
 </body>
 </html>
+
