@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Drag & Drop Übungen</title>
+  <title>Drag & Drop Übungen mit Web Speech API</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -59,13 +59,11 @@
     .green { background-color: #2ecc71; }
     .yellow { background-color: #f1c40f; }
 
-    /* Angepasste Farben für Übung 2 */
-    .apple { background-color: #27ae60; } /* Apfelgrün */
-    .banana { background-color: #f39c12; } /* Bananengelb */
-    .grape { background-color: #9b59b6; } /* Traubenlila */
-    .orange { background-color: #e67e22; } /* Orangeton */
-    
-    /* Wackeln Animation */
+    .apple { background-color: #27ae60; }
+    .banana { background-color: #f39c12; }
+    .grape { background-color: #9b59b6; }
+    .orange { background-color: #e67e22; }
+
     @keyframes shake {
       0% { transform: translateX(0); }
       25% { transform: translateX(-10px); }
@@ -74,7 +72,6 @@
       100% { transform: translateX(0); }
     }
 
-    /* Wachsen/Schrumpfen Animation */
     @keyframes growShrink {
       0% { transform: scale(1); }
       50% { transform: scale(1.2); }
@@ -175,13 +172,12 @@
 
   <script>
     let correctDrops = 0;
-    let incorrectDrops = 0;
     let totalCompletedExercises = parseInt(localStorage.getItem("completedExercises")) || 0;
-    let totalErrors = parseInt(localStorage.getItem("totalErrors")) || 0;
     
+    // Fortschritt anzeigen (optional)
     window.onload = function() {
-      if (totalCompletedExercises > 0 || totalErrors > 0) {
-        document.getElementById("feedback").textContent = `Erfolgreich abgeschlossen: ${totalCompletedExercises} | Fehler gemacht: ${totalErrors}`;
+      if (totalCompletedExercises > 0) {
+        document.getElementById("feedback").textContent = `Du hast bereits ${totalCompletedExercises} Übungen abgeschlossen!`;
       }
     }
 
@@ -200,54 +196,40 @@
       let feedback = document.getElementById("feedback");
       let dropzone = event.target;
 
+      // Überprüfen, ob das Element zur richtigen Zone verschoben wird
       if (data.includes(targetId)) {
-        // Richtige Antwort
         event.target.appendChild(draggedElement);
         feedback.textContent = "Super gemacht!";
         feedback.style.color = "green";
-        dropzone.style.animation = "growShrink 0.5s ease";
+        dropzone.style.animation = "growShrink 0.5s ease"; // Wachsen/Schrumpfen bei richtiger Antwort
         correctDrops++;
 
+        // Sprachfeedback für richtige Antwort
+        speak("Super gemacht!");
+
         if (correctDrops === 4) {
-          totalCompletedExercises++;
-          let today = new Date().toISOString().split('T')[0];
-let progressData = JSON.parse(localStorage.getItem("progressData")) || {};
-
-// Falls der heutige Eintrag nicht existiert, erstelle ihn
-if (!progressData[today]) {
-    progressData[today] = {
-        rechnen: { correct: 0, incorrect: 0 },
-        farben: { correct: 0, incorrect: 0 },
-        bilder: { correct: 0, incorrect: 0 },
-        lesen: { correct: 0, incorrect: 0 }
-    };
-}
-
-// Fortschritt für Farben aktualisieren
-progressData[today].farben.correct += 4;  // Hier je nach richtigen Versuchen anpassen
-
-localStorage.setItem("progressData", JSON.stringify(progressData));
-
+          totalCompletedExercises++; // Fortschritt erhöhen
+          localStorage.setItem("completedExercises", totalCompletedExercises); // Speichern
 
           setTimeout(() => {
-            correctDrops = 0;
+            correctDrops = 0; // Zähler zurücksetzen
             toggleExercise();
           }, 1000);
         }
       } else {
-        // Falsche Antwort
-        feedback.textContent = "Versuche es nochmal!";
-        feedback.style.color = "red";
-        dropzone.style.animation = "shake 0.5s ease";
-        incorrectDrops++;
-        totalErrors++;
-        localStorage.setItem("totalErrors", totalErrors);
+        feedback.textContent = "Versuche es nochmal. TIPP: achte auf die gleichen Farben!";
+        feedback.style.color = "red"; 
+        dropzone.style.animation = "shake 0.5s ease"; // Wackeln bei falscher Antwort
+
+        // Sprachfeedback für falsche Antwort
+        speak("Versuche es nochmal. TIPP: achte auf die gleichen Farben!");
 
         setTimeout(() => {
-          document.querySelector(".circle-container").appendChild(draggedElement);
+          draggedElement.parentElement.appendChild(draggedElement);
         }, 500);
       }
 
+      // Nach der Animation zurücksetzen
       setTimeout(() => {
         dropzone.style.animation = "none";
       }, 500);
@@ -257,13 +239,14 @@ localStorage.setItem("progressData", JSON.stringify(progressData));
       document.getElementById("exercise1").classList.toggle("hidden");
       document.getElementById("exercise2").classList.toggle("hidden");
       resetCircles();
-      correctDrops = 0;
+      correctDrops = 0; // Sicherstellen, dass die Zählung zurückgesetzt wird
     }
 
     function resetCircles() {
       const circleContainer1 = document.querySelector("#exercise1 .circle-container");
       const circleContainer2 = document.querySelector("#exercise2 .circle-container");
 
+      // Zurücksetzen der Kreise für Übung 1
       const circles1 = [
         { id: "red1", className: "item red" },
         { id: "yellow1", className: "item yellow" },
@@ -279,6 +262,7 @@ localStorage.setItem("progressData", JSON.stringify(progressData));
         }
       });
 
+      // Zurücksetzen der Kreise für Übung 2
       const circles2 = [
         { id: "apple", className: "item apple" },
         { id: "banana", className: "item banana" },
@@ -294,8 +278,15 @@ localStorage.setItem("progressData", JSON.stringify(progressData));
         }
       });
 
-      document.getElementById("feedback").textContent = `Erfolgreich abgeschlossen: ${totalCompletedExercises} | Fehler gemacht: ${totalErrors}`;
+      document.getElementById("feedback").textContent = ""; // Feedback-Text zurücksetzen
     }
-</script>
+
+    // Funktion für die Sprachwiedergabe
+    function speak(text) {
+      let speech = new SpeechSynthesisUtterance(text);
+      speech.lang = 'de-DE';
+      window.speechSynthesis.speak(speech);
+    }
+  </script>
 </body>
 </html>
