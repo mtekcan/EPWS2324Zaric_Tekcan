@@ -190,6 +190,13 @@
             localStorage.setItem("progress", JSON.stringify(progress));
         }
 
+        // Funktion zum Vorlesen von Text
+        function speakText(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'de-DE';  // Deutsch als Sprache setzen
+            window.speechSynthesis.speak(utterance);
+        }
+
         function loadTask() {
             // Falls die aktuelle Aufgabe falsch beantwortet wurde, wiederhole sie
             if (!currentTask) {
@@ -244,40 +251,17 @@
         function checkAnswer(answer) {
             if (answer === currentTask.correct) {
                 showNotification("Richtig! 🎉 Nächste Aufgabe...", true);
+                speakText("Richtig! Nächste Aufgabe...");
                 updateProgress(true);
                 currentTask = null; // Neue Aufgabe generieren
                 setTimeout(loadTask, 5000);
             } else {
+                // Hier wird der Tipp vorgelesen, wenn die Antwort falsch ist
                 showNotification("Huch, das war nicht ganz richtig. Versuch es nochmal! ❌ Tipp: Zähle die Kästchen in Grün und Lila", false);
+                speakText("Huch, das war nicht ganz richtig. Versuch es nochmal. Tipp: Zähle die Kästchen in Grün und Lila.");
                 updateProgress(false);
             }
         }
-        function updateProgress(isCorrect) {
-    let today = new Date().toISOString().split('T')[0];
-    let progressData = JSON.parse(localStorage.getItem("progressData")) || {};
-
-    // Falls heute noch nicht existiert, erstelle einen neuen Eintrag
-    if (!progressData[today]) {
-        progressData[today] = {
-            rechnen: { correct: 0, incorrect: 0 },
-            farben: { correct: 0, incorrect: 0 },
-            bilder: { correct: 0, incorrect: 0 },
-            lesen: { correct: 0, incorrect: 0 }
-        };
-    }
-
-    // Aktualisiere den Fortschritt für die aktuelle Aufgabe (z. B. "rechnen")
-    if (isCorrect) {
-        progressData[today].rechnen.correct++;
-    } else {
-        progressData[today].rechnen.incorrect++;
-    }
-
-    // Speichere die aktualisierten Fortschrittsdaten
-    localStorage.setItem("progressData", JSON.stringify(progressData));
-}
-
-        
 
         loadTask();
     </script>

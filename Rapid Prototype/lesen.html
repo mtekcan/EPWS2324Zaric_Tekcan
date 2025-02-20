@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+x<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
@@ -102,14 +102,7 @@
     .back-button:hover {
         background-color: #b68b2b;
     }
-</style>
 
-
-    select {
-      padding: 10px;
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
   </style>
 </head>
 <body>
@@ -128,7 +121,7 @@
     <div class="drop-zone" id="dropZone">Ziehe die Puzzlestücke hierher</div>
     <div class="puzzle-container" id="puzzleContainer"></div>
     <div class="correct-message" id="correctMessage" style="display: none; color: green;">Richtig! 🎉 Die nächste Aufgabe wird geladen...</div>
-    <div class="incorrect-message" id="incorrectMessage" style="display: none; color: red;"> ❌Fast geschafft! Aber ein Stück ist noch nicht am richtigen Platz. Probier es nochmal – du schaffst das!</div>
+    <div class="incorrect-message" id="incorrectMessage" style="display: none; color: red;"> ❌Fast geschafft! aber ein Stück ist noch nicht am richtigen Platz. Probier es nochmal – du schaffst das!</div>
   </div>
 
   <script>
@@ -144,7 +137,7 @@
     const wordsByCategory = {
       farben: ["Vio-lett", "Ma-gen-ta", "La-vendel", "Li-la", "Oran-ge", "Ro-sa", "Dun-kel-blau", "Dun-kel-rot", "Dun-kel-grün"],
       haushalt: ["Ta-sse", "Tel-ler", "Lam-pe", "Fens-ter", "Löf-fel", "Mes-ser", "Toas-ter", "Pfan-ne", "Tep-pich", "Be-cher", "Ga-bel", "Wasch-be-cken"],
-      tiere: ["Kat-ze", "Hun-d", "Lö-we", "Ti-ger", "Vo-gel", "Fi-sch", "Ha-se", "E-le-fant", "Gi-raf-fe", "Pan-da", "Ha-se", "En-te", "Spin-ne"],
+      tiere: ["Kat-ze", "Lö-we", "Ti-ger", "Vo-gel", "Fi-sch", "Ha-se", "E-le-fant", "Gi-raf-fe", "Pan-da", "Ha-se", "En-te", "Spin-ne"],
       pflanzen: ["Blu-me", "Tul-pe", "Apfel-baum", "Tan-ne", "Ro-se", "Tul-pe", "Kak-tus", "Son-nen-blume"]
     };
 
@@ -206,62 +199,66 @@
       }
     }
 
+    function speakText(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'de-DE';  // Deutsch als Sprache setzen
+      window.speechSynthesis.speak(utterance);
+    }
+
     function checkCorrect() {
-    const piecesInDropZone = Array.from(dropZone.children).filter(el => el.classList.contains("puzzle-piece"));
-    const piecesText = piecesInDropZone.map(piece => piece.textContent).join("");
+      const piecesInDropZone = Array.from(dropZone.children).filter(el => el.classList.contains("puzzle-piece"));
+      const piecesText = piecesInDropZone.map(piece => piece.textContent).join("");
 
-    let today = new Date().toISOString().split('T')[0];
-    let progressData = JSON.parse(localStorage.getItem("progressData")) || {};
+      let today = new Date().toISOString().split('T')[0];
+      let progressData = JSON.parse(localStorage.getItem("progressData")) || {};
 
-    console.log("Vorher:", JSON.stringify(progressData, null, 2));
+      // Falls progressData für heute nicht existiert, erstelle es
+      if (!progressData[today]) {
+          progressData[today] = {
+              rechnen: { correct: 0, incorrect: 0 },
+              farben: { correct: 0, incorrect: 0 },
+              bilder: { correct: 0, incorrect: 0 },
+              lesen: { correct: 0, incorrect: 0 }
+          };
+      }
 
-    // Falls progressData für heute nicht existiert, erstelle es
-    if (!progressData[today]) {
-        progressData[today] = {
-            rechnen: { correct: 0, incorrect: 0 },
-            farben: { correct: 0, incorrect: 0 },
-            bilder: { correct: 0, incorrect: 0 },
-            lesen: { correct: 0, incorrect: 0 }
-        };
+      // Stellen Sie sicher, dass correct und incorrect Zahlen sind
+      progressData[today].lesen.correct = parseInt(progressData[today].lesen.correct) || 0;
+      progressData[today].lesen.incorrect = parseInt(progressData[today].lesen.incorrect) || 0;
+
+      if (piecesText === currentTask.word) {
+          correctMessage.style.display = "block";
+          incorrectMessage.style.display = "none";
+          progressData[today].lesen.correct += 1; // ✅ Richtige Antwort erhöhen
+
+          speakText("Richtig! Die nächste Aufgabe wird geladen..."); // Vorlesen der richtigen Antwort
+
+          setTimeout(() => {
+              correctMessage.style.display = "none";
+              loadRandomTask();
+          }, 6000);
+      } else {
+          incorrectMessage.style.display = "block";
+          correctMessage.style.display = "none";
+          progressData[today].lesen.incorrect += 1; // ❌ Falsche Antwort erhöhen
+
+          speakText("Fast geschafft! aber ein Stück ist noch nicht am richtigen Platz. Probier es nochmal – du schaffst das!"); // Vorlesen der falschen Antwort
+
+          setTimeout(() => {
+              incorrectMessage.style.display = "none";
+
+              // Puzzleteile in den Puzzle-Container zurücklegen
+              piecesInDropZone.forEach(piece => puzzleContainer.appendChild(piece));
+
+              if (dropZone.children.length === 0 || piecesInDropZone.length > 0) {
+                  dropZone.innerHTML = "Ziehe die Puzzlestücke hierher";
+              }
+          }, 7000);
+      }
+
+      localStorage.setItem("progressData", JSON.stringify(progressData));
     }
 
-    // Stelle sicher, dass correct und incorrect Zahlen sind
-    progressData[today].lesen.correct = parseInt(progressData[today].lesen.correct) || 0;
-    progressData[today].lesen.incorrect = parseInt(progressData[today].lesen.incorrect) || 0;
-
-    if (piecesText === currentTask.word) {
-        correctMessage.style.display = "block";
-        incorrectMessage.style.display = "none";
-        progressData[today].lesen.correct += 1; // ✅ Richtige Antwort erhöhen
-
-        setTimeout(() => {
-            correctMessage.style.display = "none";
-            loadRandomTask();
-        }, 2000);
-    } else {
-        incorrectMessage.style.display = "block";
-        correctMessage.style.display = "none";
-        progressData[today].lesen.incorrect += 1; // ❌ Falsche Antwort erhöhen
-
-        setTimeout(() => {
-            incorrectMessage.style.display = "none";
-
-            // Puzzleteile in den Puzzle-Container zurücklegen
-            piecesInDropZone.forEach(piece => puzzleContainer.appendChild(piece));
-
-            if (dropZone.children.length === 0 || piecesInDropZone.length > 0) {
-                dropZone.innerHTML = "Ziehe die Puzzlestücke hierher";
-            }
-        }, 5000);
-    }
-
-    console.log("Nachher:", JSON.stringify(progressData, null, 2));
-    localStorage.setItem("progressData", JSON.stringify(progressData));
-}
-
-
-
-    
     // Neue Aufgabe laden, wenn Kategorie geändert wird
     categorySelect.addEventListener("change", loadRandomTask);
 
@@ -270,6 +267,7 @@
   </script>
   <footer>
     <a href="index.html" class="back-button">Zurück zur Startseite</a>
-</footer>
+  </footer>
 </body>
 </html>
+
