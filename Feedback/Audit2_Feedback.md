@@ -1,4 +1,4 @@
-##Folie zwei:
+## Folie zwei:
 -beim Domänenmodell sind die Verbindungen  durcheinander Therapeut und Veriene pfeil umändern
 -bei der Stakeholderamalyse passen die Überschriften nicht
 -aufteilen Anspruch, Interesse die spielereische und farbenfrohe lernmethoden wären vielleicht interessen aber kein Anspruch
