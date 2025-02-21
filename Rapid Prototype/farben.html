@@ -173,6 +173,7 @@
   <script>
     let correctDrops = 0;
     let totalCompletedExercises = parseInt(localStorage.getItem("completedExercises")) || 0;
+    let totalErrors = parseInt(localStorage.getItem("totalErrors")) || 0;
     
     // Fortschritt anzeigen (optional)
     window.onload = function() {
@@ -209,7 +210,24 @@
 
         if (correctDrops === 4) {
           totalCompletedExercises++; // Fortschritt erhöhen
-          localStorage.setItem("completedExercises", totalCompletedExercises); // Speichern
+          let today = new Date().toISOString().split('T')[0];
+
+          let progressData = JSON.parse(localStorage.getItem("progressData")) || {};
+
+// Falls der heutige Eintrag nicht existiert, erstelle ihn
+if (!progressData[today]) {
+    progressData[today] = {
+        rechnen: { correct: 0, incorrect: 0 },
+        farben: { correct: 0, incorrect: 0 },
+        bilder: { correct: 0, incorrect: 0 },
+        lesen: { correct: 0, incorrect: 0 }
+    };
+}
+
+// Fortschritt für Farben aktualisieren
+progressData[today].farben.correct += 4;  // Hier je nach richtigen Versuchen anpassen
+
+localStorage.setItem("progressData", JSON.stringify(progressData));
 
           setTimeout(() => {
             correctDrops = 0; // Zähler zurücksetzen
@@ -220,6 +238,10 @@
         feedback.textContent = "Versuche es nochmal. TIPP: achte auf die gleichen Farben!";
         feedback.style.color = "red"; 
         dropzone.style.animation = "shake 0.5s ease"; // Wackeln bei falscher Antwort
+        incorrectDrops++;
+        totalErrors++;
+        localStorage.setItem("totalErrors", totalErrors);
+
 
         // Sprachfeedback für falsche Antwort
         speak("Versuche es nochmal. TIPP: achte auf die gleichen Farben!");
@@ -278,7 +300,7 @@
         }
       });
 
-      document.getElementById("feedback").textContent = ""; // Feedback-Text zurücksetzen
+      document.getElementById("feedback").textContent = `Erfolgreich abgeschlossen: ${totalCompletedExercises} | Fehler gemacht: ${totalErrors}`;
     }
 
     // Funktion für die Sprachwiedergabe
@@ -287,6 +309,7 @@
       speech.lang = 'de-DE';
       window.speechSynthesis.speak(speech);
     }
+
   </script>
 </body>
 </html>

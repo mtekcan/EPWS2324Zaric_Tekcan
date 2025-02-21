@@ -46,21 +46,8 @@
       border-color: #6200ea;
     }
     .footer {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      
-      color: white;
-      padding: 15px 30px;
-      font-size: 18px;
-      border-radius: 5px;
-      text-decoration: none;
       text-align: center;
-      cursor: pointer;
-    }
-    .footer:hover {
-      background-color: #8e681e;
+      margin-top: 20px;
     }
     .back-button {
       display: inline-block;
@@ -72,18 +59,16 @@
       text-decoration: none;
       cursor: pointer;
     }
-
     .back-button:hover {
       background-color: #b68b2b;
     }
-
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Wähle das richtige Bild aus</h1>
+    <p id="question-text"></p>
     <div class="images" id="images"></div>
-    <p class="text" id="question-text"></p>
   </div>
 
   <div class="footer">
@@ -92,23 +77,31 @@
 
   <script>
     const tasks = [
-      { question: "Pfirsich", images: [
+      {
+        question: "Pfirsich",
+        images: [
           { name: "Pfirsich", url: "Images/Pfirsich.jpg" },
           { name: "Banane", url: "Images/Banane.jpg" },
           { name: "Erdbeere", url: "Images/Erdbeere.jpg" },
           { name: "Apfel", url: "Images/Apfel.jpg" }
-        ], correct: "Pfirsich" },
-      { question: "Banane", images: [
+        ],
+        correct: "Pfirsich"
+      },
+      {
+        question: "Banane",
+        images: [
           { name: "Apfel", url: "Images/Apfel.jpg" },
           { name: "Banane", url: "Images/Banane.jpg" },
           { name: "Erdbeere", url: "Images/Erdbeere.jpg" },
           { name: "Pfirsich", url: "Images/Pfirsich.jpg" }
-        ], correct: "Banane" }
+        ],
+        correct: "Banane"
+      }
     ];
 
+    let currentTaskIndex = parseInt(localStorage.getItem('currentTaskIndex')) || 0;
     const imagesContainer = document.getElementById("images");
     const questionText = document.getElementById("question-text");
-    let currentTaskIndex = localStorage.getItem('currentTaskIndex') || 0;
 
     function speak(text, callback) {
       let speech = new SpeechSynthesisUtterance(text);
@@ -117,10 +110,45 @@
       window.speechSynthesis.speak(speech);
     }
 
+    function checkAnswer(selectedImage) {
+      const task = tasks[currentTaskIndex];
+      let today = new Date().toISOString().split('T')[0];
+      let progressData = JSON.parse(localStorage.getItem("progressData")) || {};
+
+      if (!progressData[today]) {
+        progressData[today] = {
+          rechnen: { correct: 0, incorrect: 0 },
+          farben: { correct: 0, incorrect: 0 },
+          bilder: { correct: 0, incorrect: 0 },
+          lesen: { correct: 0, incorrect: 0 }
+        };
+      }
+
+      progressData[today].bilder.correct = parseInt(progressData[today].bilder.correct) || 0;
+      progressData[today].bilder.incorrect = parseInt(progressData[today].bilder.incorrect) || 0;
+
+      if (selectedImage === task.correct) {
+        speak("Richtig! Du hast das super gemacht!", nextTask);
+        progressData[today].bilder.correct += 1;
+      } else {
+        speak("Das war leider nicht richtig. Tipp: Achte auf die Bilder!", nextTask);
+        progressData[today].bilder.incorrect += 1;
+      }
+
+      localStorage.setItem("progressData", JSON.stringify(progressData));
+    }
+
+    function nextTask() {
+      currentTaskIndex = (currentTaskIndex + 1) % tasks.length;
+      localStorage.setItem('currentTaskIndex', currentTaskIndex);
+      loadTask();
+    }
+
     function loadTask() {
       const task = tasks[currentTaskIndex];
-      questionText.textContent = task.question;
+      questionText.textContent = `Welches Bild zeigt einen ${task.question}?`;
       imagesContainer.innerHTML = "";
+
       task.images.forEach((image) => {
         const img = document.createElement("img");
         img.src = image.url;
@@ -132,24 +160,8 @@
       });
     }
 
-    function checkAnswer(selectedImage) {
-      const task = tasks[currentTaskIndex];
-      if (selectedImage === task.correct) {
-        speak("Richtig du hast das super gemacht!", nextTask);
-      } else {
-        speak("Das war leider nicht richtig TIPP: achte auf die Bilder", nextTask);
-      }
-    }
-
-    function nextTask() {
-      currentTaskIndex = (parseInt(currentTaskIndex) + 1) % tasks.length;
-      localStorage.setItem('currentTaskIndex', currentTaskIndex);
-      loadTask();
-    }
-
     loadTask();
+  
   </script>
 </body>
 </html>
-
-
