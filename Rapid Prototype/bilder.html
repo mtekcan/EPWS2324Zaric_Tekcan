@@ -96,6 +96,26 @@
           { name: "Pfirsich", url: "Images/Pfirsich.jpg" }
         ],
         correct: "Banane"
+      },
+      {
+        question: "Erdbeere",
+        images: [
+          { name: "Apfel", url: "Images/Apfel.jpg" },
+          { name: "Banane", url: "Images/Banane.jpg" },
+          { name: "Erdbeere", url: "Images/Erdbeere.jpg" },
+          { name: "Pfirsich", url: "Images/Pfirsich.jpg" }
+        ],
+        correct: "Erdbeere"
+      },
+      {
+        question: "Apfel",
+        images: [
+          { name: "Apfel", url: "Images/Apfel.jpg" },
+          { name: "Banane", url: "Images/Banane.jpg" },
+          { name: "Erdbeere", url: "Images/Erdbeere.jpg" },
+          { name: "Pfirsich", url: "Images/Pfirsich.jpg" }
+        ],
+        correct: "Apfel"
       }
     ];
 
@@ -131,7 +151,7 @@
         speak("Richtig! Du hast das super gemacht!", nextTask);
         progressData[today].bilder.correct += 1;
       } else {
-        speak("Das war leider nicht richtig. Tipp: Achte auf die Bilder!", nextTask);
+        speak("Das war leider nicht richtig. Achte auf die Bilder!", nextTask);
         progressData[today].bilder.incorrect += 1;
       }
 
@@ -146,7 +166,7 @@
 
     function loadTask() {
       const task = tasks[currentTaskIndex];
-      questionText.textContent = `Welches Bild zeigt einen ${task.question}?`;
+      questionText.textContent = `${task.question}`;
       imagesContainer.innerHTML = "";
 
       task.images.forEach((image) => {
