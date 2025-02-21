@@ -1,6 +1,5 @@
 ## Folie zwei:
--beim Domänenmodell sind die Verbindungen  durcheinander Therapeut und Veriene pfeil umändern
--bei der Stakeholderamalyse passen die Überschriften nicht
+-beim Domänenmodell sind die Verbindungen  durcheinander Therapeut und Veriene pfeil umändern -bei der Stakeholderamalyse passen die Überschriften nicht
 -aufteilen Anspruch, Interesse die spielereische und farbenfrohe lernmethoden wären vielleicht interessen aber kein Anspruch
 -spielerisch und farbenfroh trennen und genau meinen was wir meinen
 aufteile Überschrift in mci nachgucken beim stakeholder
